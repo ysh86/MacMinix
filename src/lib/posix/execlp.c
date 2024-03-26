@@ -43,14 +43,23 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+extern int __execve(
+char *path,			/* pointer to name of file to be executed */
+char *argv[],			/* pointer to argument array */
+char *envp[],			/* pointer to environment */
+int nargs,			/* number of args */
+int nenvps			/* number of environment strings */
+);
+
 #undef NULL
 #define NULL 0			/* kludge for ACK not understanding void * */
 
 extern char **environ;		/* environment pointer */
 
-int execlp(file /* , ... */ )
-char *file;
-{
+int execlp(
+const char *file,
+...
+){
   register va_list argp;
   register int result;
 
@@ -60,10 +69,10 @@ char *file;
   return(result);
 }
 
-int execvp(file, argv)
-char *file;
-char **argv;
-{
+int execvp(
+const char *file,
+char *argv[]
+){
   register char **argp;
   char **argtop;
   int best_errno;
@@ -133,8 +142,8 @@ char **argv;
 		/* Try only /bin/sh, like the Minix shell.  Lose if the user
 		 * has a different shell or the command has #!another/shell.
 		 */
-		__execve("/bin/sh", argv, environ, argtop - argv,
-			 envtop - environ);
+		__execve("/bin/sh", argv, environ, (int)(argtop - argv),
+			 (int)(envtop - environ));
 
 		/* Oops, no shell?  Restore argv and give up. */
 		--argtop;

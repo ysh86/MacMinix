@@ -13,7 +13,7 @@
 
 #define  DIRECT_SIZE  (sizeof (struct direct))
 
-extern char *rindex();
+static void go_back(char *path);
 
 char *getcwd(buffer, size)
 char *buffer;
@@ -99,9 +99,9 @@ int size;
   return(chdir(buffer) ? (char *)NULL : buffer);
 }
 
-PRIVATE go_back(path)
-char *path;
-{
+static void go_back(
+char *path
+){
 /* If getcwd() gets in trouble and can't complete normally, reverse the
  * path built so far and change there so we end up in the directory that
  * we started in.

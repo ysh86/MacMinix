@@ -2,20 +2,31 @@
 #include <string.h>
 #include <unistd.h>
 
+extern int __execve(
+char *path,			/* pointer to name of file to be executed */
+char *argv[],			/* pointer to argument array */
+char *envp[],			/* pointer to environment */
+int nargs,			/* number of args */
+int nenvps			/* number of environment strings */
+);
+
 extern char **environ;		/* environment pointer */
 
 #define	PTRSIZE	(sizeof(char *))
 
-PUBLIC int execl(name, arg0)
-char *name;
-char *arg0;
-{
+PUBLIC int execl(
+const char *name,
+const char *arg0,
+...
+){
   return(execve(name, &arg0, environ));
 }
 
-PUBLIC int execle(name, argv)
-char *name, *argv;
-{
+PUBLIC int execle(
+const char *name,
+const char *argv,
+...
+){
   char **p;
   p = (char **) &argv;
   while (*p++)			/* null statement */
@@ -23,35 +34,36 @@ char *name, *argv;
   return(execve(name, &argv, (char **) *p));
 }
 
-PUBLIC int execv(name, argv)
-char *name, *argv[];
-{
+PUBLIC int execv(
+const char *name,
+char *const argv[]
+){
   return(execve(name, argv, environ));
 }
 
 
-PUBLIC int execve(path, argv, envp)
-char *path;			/* pointer to name of file to be executed */
-char *argv[];			/* pointer to argument array */
-char *envp[];			/* pointer to environment */
-{
-  register char **argtop;
-  register char **envtop;
+PUBLIC int execve(
+const char *path,			/* pointer to name of file to be executed */
+char *const argv[],			/* pointer to argument array */
+char *const envp[]			/* pointer to environment */
+){
+  register char *const *argtop;
+  register char *const *envtop;
 
   /* Count the argument pointers and environment pointers. */
   for (argtop = argv; *argtop != (char *) NULL; ) argtop++;
   for (envtop = envp; *envtop != (char *) NULL; ) envtop++;
-  return(__execve(path, argv, envp, argtop - argv, envtop - envp));
+  return(__execve(path, argv, envp, (int)(argtop - argv), (int)(envtop - envp)));
 }
 
 
-PUBLIC int __execve(path, argv, envp, nargs, nenvps)
-char *path;			/* pointer to name of file to be executed */
-char *argv[];			/* pointer to argument array */
-char *envp[];			/* pointer to environment */
-int nargs;			/* number of args */
-int nenvps;			/* number of environment strings */
-{
+PUBLIC int __execve(
+char *path,			/* pointer to name of file to be executed */
+char *argv[],			/* pointer to argument array */
+char *envp[],			/* pointer to environment */
+int nargs,			/* number of args */
+int nenvps			/* number of environment strings */
+){
 /* This is split off from execve to be called from execvp, so execvp does not
  * have to allocate up to ARG_MAX bytes just to prepend "sh" to the arg array.
  */

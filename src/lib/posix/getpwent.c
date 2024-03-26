@@ -112,9 +112,9 @@ char *__name;
 	return((struct passwd *)NULL);
 }
 
-PUBLIC struct passwd *getpwuid(__uid)
-uid_t __uid;
-{
+PUBLIC struct passwd *getpwuid(
+uid_t __uid
+){
   struct passwd *pwd;
 
   setpwent();
