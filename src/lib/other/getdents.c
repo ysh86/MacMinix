@@ -307,7 +307,7 @@ unsigned nbyte;			/* size of buf[] */
 				/* Ensure NUL termination */
 #endif
 				(void) strncpy(bp->d_name, dp->d_name,
-					       reclen - DIRENTBASESIZ
+					       (size_t) reclen - (size_t) DIRENTBASESIZ
 					);	/* adds NUL padding */
 #ifdef UFS
 				dp->d_name[NAME_MAX] = save;

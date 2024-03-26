@@ -25,7 +25,7 @@ char *command, *type;
 	register int *p;
 
 	for (p = pids; p < &pids[20]; p++) {
-		if (*p) close(p - pids);
+		if (*p) close((int)(p - pids));
 	}
 	close(piped[Xtype]);
 	dup2(piped[!Xtype], !Xtype);

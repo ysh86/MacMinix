@@ -75,11 +75,11 @@ extern char *_gcvt();
 
 #define	GETARG(typ)	va_arg(args, typ)
 
-void _doprintf(iop, fmt, argsfix)
-FILE *iop;
-_CONST register char *fmt;
-va_list argsfix;
-{
+void _doprintf(
+FILE *iop,
+const register char *fmt,
+void *argsfix
+){
   char buf[MAXDIG + 1];		/* +1 for sign */
   register char *p;
   register char *s;

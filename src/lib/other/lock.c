@@ -4,7 +4,10 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include <stdio.h>
+
+extern void syserr(const char *);
 
 typedef enum {
   False, True

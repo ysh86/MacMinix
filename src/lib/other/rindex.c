@@ -3,9 +3,9 @@
 
 #include <string.h>
 
-char *rindex(s, charwanted)	/* found char, or NULL if none */
-_CONST char *s;
-char charwanted;
-{
+char *rindex(	/* found char, or NULL if none */
+const char *s,
+char charwanted
+){
   return(strrchr(s, charwanted));
 }
