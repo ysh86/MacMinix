@@ -2,11 +2,11 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-char *vsprintf(buf, format, argp)
-char *buf;
-_CONST char *format;
-va_list argp;
-{
+char *vsprintf(
+char *buf,
+const char *format,
+void *argp
+){
   FILE _tempfile;
 
   _tempfile._fd = -1;

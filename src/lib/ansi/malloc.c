@@ -41,7 +41,6 @@ PRIVATE _PROTOTYPE( void assert_failed, (void));
  * Free slots are merged together by free().
  */
 
-extern char *sbrk(), *brk();
 PRIVATE char *_bottom, *_top, *_empty;
 
 PRIVATE _PROTOTYPE( int grow, (unsigned len));

@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define toint(X)  (X - '0')
 
@@ -76,9 +77,9 @@ PRIVATE int dst = -1;	/* whether dst holds in current timezone */
  *
  */
 
-time_t mktime(t)
-_CONST struct tm *t;
-{
+time_t mktime(
+struct tm *t
+){
         time_t s;
         int y;
 
