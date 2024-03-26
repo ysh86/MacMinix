@@ -60,7 +60,7 @@ _PROTOTYPE( void *bsearch,
 	size_t _size, int (*_compar) (const void *, const void *))	);
 _PROTOTYPE( void qsort, (void *_base, size_t _nmemb, size_t _size,
 	int (*_compar) (const void *, const void *))			);
-_PROTOTYPE( unsigned long int strtoul,
-			(const char *_nptr, char **_endptr, int _base)	);
+_PROTOTYPE( unsigned long strtoul,
+	(const char *_nptr, char **_endptr, int _base)			);
 
 #endif /* STDLIB_H */
