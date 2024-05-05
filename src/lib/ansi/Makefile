@@ -1,6 +1,5 @@
 CC= c68
-CFLAGS= -c -LIB -D_MINIX -D_POSIX_SOURCE -D__STDC__=1
-
+CFLAGS= -c -O -LIB -D_MINIX -D_POSIX_SOURCE -D__STDC__=1
 MFILE=Makefile
 
 $f.o:	$f.c

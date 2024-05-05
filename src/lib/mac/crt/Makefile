@@ -1,4 +1,5 @@
-CFLAGS= -c -DACK -LIB -D_MINIX -D_POSIX_SOURCE
+CC= c68
+CFLAGS= -c -O -DACK -LIB -D_MINIX -D_POSIX_SOURCE -D__STDC__=1
 MFILE=Makefile
 
 $f.o:	$f.$e
