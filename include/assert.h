@@ -26,12 +26,6 @@
 #define assert(expr)  ((void) 0)
 #else
 /* Debugging enabled -- verify assertions at run time. */
-
-#if _ANSI
 void __bad_assertion (const char *__expr, const char *__file, int __line);
 #define assert(expr) ((void) ((expr) ? (void)0 : __bad_assertion( #expr, __FILE__,  __LINE__)))
-#else
-#define assert(expr) ((void) ((expr) ? 0 : __assert( __FILE__,  __LINE__)))
-#endif
-
 #endif

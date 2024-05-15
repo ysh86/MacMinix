@@ -27,10 +27,11 @@
 
 #define  PMODE    0666
 
-FILE *freopen(name, mode,fp)
-_CONST char *name , *mode;
-FILE *fp;
-{
+FILE *freopen(
+const char *name,
+const char *mode,
+FILE *fp
+){
 	register int i;
 	int fd, flags;
 
@@ -53,15 +54,15 @@ FILE *fp;
 			return((FILE *)NULL);
 		break;
 
-	case 'a': 
+	case 'a':
 		flags |= WRITEMODE;
 		if (( fd = open(name,1)) < 0 )
 			return((FILE *)NULL);
 		lseek(fd,0L,2);
-		break;         
+		break;
 
 	case 'r':
-		flags |= READMODE;	
+		flags |= READMODE;
 		if (( fd = open (name,0)) < 0 )
 			return((FILE *)NULL);
 		break;

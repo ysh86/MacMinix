@@ -3,11 +3,11 @@
 
 #include <string.h>
 
-char *strstr(s, wanted)		/* found string, or NULL if none */
-_CONST char *s;
-_CONST char *wanted;
-{
-  register _CONST char *scan;
+char *strstr(		/* found string, or NULL if none */
+const char *s,
+const char *wanted
+){
+  register const char *scan;
   register size_t len;
   register char firstc;
 

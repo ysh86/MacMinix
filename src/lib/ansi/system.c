@@ -11,11 +11,11 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int system(cmd)
-_CONST char *cmd;
-{
+int system(
+const char *cmd
+){
   int retstat, procid, waitstat;
-  void (*sigint) (), (*sigquit) ();
+  void (*sigint) (int), (*sigquit) (int);
 
   if ((procid = fork()) == 0) {
 	/* Child does an exec of the command. */

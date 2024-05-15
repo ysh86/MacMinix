@@ -13,11 +13,11 @@
 #	define	UNSCHAR(c)	((c)&CHARBITS)
 #endif
 
-void *memset(s, ucharfill, size)
-_VOIDSTAR s;
-register int ucharfill;
-size_t size;
-{
+void *memset(
+void *s,
+int ucharfill,
+size_t size
+){
   register char *scan;
   register size_t n;
   register int uc;

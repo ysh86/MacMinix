@@ -6,11 +6,11 @@
 
 #include <string.h>
 
-size_t strxfrm(s1, s2, n)
-char *s1;
-_CONST char *s2;
-size_t n;
-{
+size_t strxfrm(
+char *s1,
+const char *s2,
+size_t n
+){
   strncpy(s1, s2, n);
   return strlen(s2);
 }

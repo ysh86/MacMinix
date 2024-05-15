@@ -3,11 +3,11 @@
 
 #include <string.h>
 
-char *strchr(s, charwanted) 	/* found char, or NULL if none */
-_CONST char *s;
-register char charwanted;
-{
-  register _CONST char *scan;
+char *strchr( 	/* found char, or NULL if none */
+const char *s,
+int charwanted
+){
+  register const char *scan;
 
   /* The odd placement of the two tests is so NUL is findable. */
   for (scan = s; *scan != charwanted;)	/* ++ moved down for opt. */

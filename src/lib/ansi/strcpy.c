@@ -3,12 +3,12 @@
 
 #include <string.h>
 
-char *strcpy(dst, src)
-char *dst;
-_CONST char *src;
-{
+char *strcpy(
+char *dst,
+const char *src
+){
   register char *dscan;
-  register _CONST char *sscan;
+  register const char *sscan;
 
   dscan = dst;
   sscan = src;

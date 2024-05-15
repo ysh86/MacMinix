@@ -2,13 +2,13 @@
 
 #include <string.h>
 
-char *strncat(dst, src, n)
-char *dst;
-_CONST char *src;
-size_t n;
-{
+char *strncat(
+char *dst,
+const char *src,
+size_t n
+){
   register char *dscan;
-  register _CONST char *sscan;
+  register const char *sscan;
   register size_t count;
 
   for (dscan = dst; *dscan != '\0'; dscan++) continue;

@@ -2,11 +2,11 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int fseek(iop, offset, where)
-FILE *iop;
-long offset;
-int where;
-{
+int fseek(
+FILE *iop,
+long offset,
+int where
+){
   int count;
   long pos = -1L;
 

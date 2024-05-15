@@ -3,13 +3,13 @@
 
 #include <string.h>
 
-void *memcpy(dst, src, size)
-_VOIDSTAR dst;
-_CONST _VOIDSTAR src;
-size_t size;
-{
+void *memcpy(
+void *dst,
+const void *src,
+size_t size
+){
   register char *d;
-  register _CONST char *s;
+  register const char *s;
   register size_t n;
 
   if (size <= 0) return(dst);

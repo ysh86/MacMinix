@@ -52,17 +52,17 @@ union ptr_union {
   unsigned long *ulong_p;
 };
 
-PRIVATE int ic;			/* the current character */
-PRIVATE char *rnc_arg;		/* the string or the filepointer */
-PRIVATE rnc_code;		/* 1 = read from string, else from FILE */
+static int ic;			/* the current character */
+static char *rnc_arg;		/* the string or the filepointer */
+static rnc_code;		/* 1 = read from string, else from FILE */
 
-PRIVATE _PROTOTYPE( void rnc, (void));
-PRIVATE _PROTOTYPE( int scnindex, (int ch, char *string));
-PRIVATE _PROTOTYPE( void ugc, (void));
+static void rnc(void);
+static int scnindex(int ch, char *string);
+static void ugc(void);
 
 /* Get the next character */
 
-PRIVATE void rnc()
+static void rnc(void)
 {
   if (rnc_code) {
 	if (!(ic = *rnc_arg++)) ic = EOF;
@@ -74,9 +74,8 @@ PRIVATE void rnc()
 /* unget the current character
  */
 
-PRIVATE void ugc()
+static void ugc(void)
 {
-
   if (rnc_code)
 	--rnc_arg;
   else
@@ -84,10 +83,10 @@ PRIVATE void ugc()
 }
 
 
-PRIVATE int scnindex(ch, string)
-int ch;
-char *string;
-{
+static int scnindex(
+int ch,
+char *string
+){
   while (*string++ != (char) ch)
 	if (!*string) return(0);
   return(1);

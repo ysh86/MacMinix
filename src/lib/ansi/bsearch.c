@@ -19,16 +19,16 @@
 
 #include <stddef.h>
 
-void *bsearch(key, basefix, count, width, keycmp)
-_CONST void *key;
-_CONST void *basefix;
-unsigned int count;
-unsigned int width;
-_PROTOTYPE( int (*keycmp), (const void *, const void *));
-{
-  _CONST char *mid_point;
+void *bsearch(
+const void *key,
+const void *basefix,
+size_t count,
+size_t width,
+int (*keycmp)(const void *, const void *)
+){
+  const char *mid_point;
   int cmp;
-  _CONST char *base = (char *) basefix;
+  const char *base = (char *) basefix;
 
   while (count > 0) {
 	mid_point = base + width * (count >> 1);

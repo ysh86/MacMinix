@@ -5,12 +5,12 @@
 
 #include <string.h>
 
-size_t strcspn(s, reject)
-_CONST char *s;
-_CONST char *reject;
-{
-  register _CONST char *scan;
-  register _CONST char *rscan;
+size_t strcspn(
+const char *s,
+const char *reject
+){
+  register const char *scan;
+  register const char *rscan;
   register size_t count;
 
   count = 0;

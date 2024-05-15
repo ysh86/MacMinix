@@ -3,13 +3,13 @@
 
 #include <string.h>
 
-int  memcmp(s1, s2, size)
-_CONST _VOIDSTAR s1;		/* <0, == 0, >0 */
-_CONST _VOIDSTAR s2;
-size_t size;
-{
-  register _CONST char *scan1;
-  register _CONST char *scan2;
+int  memcmp(
+const void *s1,		/* <0, == 0, >0 */
+const void *s2,
+size_t size
+){
+  register const char *scan1;
+  register const char *scan2;
   register size_t n;
 
   scan1 = (char *) s1;

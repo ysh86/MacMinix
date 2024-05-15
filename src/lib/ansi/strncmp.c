@@ -2,13 +2,13 @@
 
 #include <string.h>
 
-int strncmp(s1, s2, n)		/* <0 for <, 0 for ==, >0 for > */
-_CONST char *s1;
-_CONST char *s2;
-size_t n;
-{
-  register _CONST char *scan1;
-  register _CONST char *scan2;
+int strncmp(		/* <0 for <, 0 for ==, >0 for > */
+const char *s1,
+const char *s2,
+size_t n
+){
+  register const char *scan1;
+  register const char *scan2;
   register size_t count;
 
   scan1 = s1;

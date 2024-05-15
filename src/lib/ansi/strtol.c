@@ -14,14 +14,14 @@
 #undef strtol
 #endif
 
-PUBLIC long strtol(
+long strtol(
 const char *nptr,
 char **endptr,
 int base
 ){
   register int c;
-  long int result = 0L;
-  long int limit;
+  long result = 0L;
+  long limit;
   int negative = 0;
   int overflow = 0;
   int saw_a_digit = 0;			/* it's not a number without a digit */
@@ -72,7 +72,7 @@ int base
 		result *= base;
 		if (c > LONG_MAX - result)
 			overflow = 1;
-		else	
+		else
 			result += c;
 	}
   }

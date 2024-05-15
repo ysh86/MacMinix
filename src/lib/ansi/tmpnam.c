@@ -22,12 +22,11 @@
 #define L_tmpnam	14
 #endif
 
-extern char *mktemp( 	/* template */ );
+extern char *mktemp(char *template);
 
-char *tmpnam(buf)
-char *buf;
+char *tmpnam(char *buf)
 {
-  PRIVATE char our_buf[2 * L_tmpnam];
+  static char our_buf[2 * L_tmpnam];
   register char *dest;
 
   dest = (buf == (char *) NULL ? our_buf : buf);

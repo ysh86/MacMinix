@@ -3,8 +3,7 @@
 #include <stdio.h>
 
 
-int fgetc(iop)
-FILE *iop;
+int fgetc(FILE *iop)
 {
   char ch;
 

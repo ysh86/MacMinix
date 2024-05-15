@@ -8,13 +8,10 @@
 #define HALF_PI 1.570796327
 #define TWO_PI 6.283185308
 
-PRIVATE _PROTOTYPE( double series, (double x));
-
-PRIVATE double series(x)
-double x;
-
-{
-  PRIVATE double coef[5] = {
+static double series(
+double x
+){
+  static double coef[5] = {
 	   1.0, -0.1666665, 8.333026e-3, -1.980741e-4, 2.601887e-6};
   double x2, ans;
   int i;
@@ -25,10 +22,9 @@ double x;
   return(ans * x);
 }
 
-double sin(x)
-double x;
-
-{
+double sin(
+double x
+){
 
   if ((x > 1.0e5) || (x < -1.0e5))	/* needed to guarantee that
 					 * while loop will terminate
@@ -41,9 +37,8 @@ double x;
   return(series(x));
 }
 
-double cos(x)
-double x;
-
-{
+double cos(
+double x
+){
   return(sin(x + HALF_PI));
 }

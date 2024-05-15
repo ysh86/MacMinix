@@ -1,8 +1,7 @@
 #include <lib.h>
 #include "stdio.h"
 
-int puts(s)
-_CONST char *s;
+int puts(const char *s)
 {
   char c;
 

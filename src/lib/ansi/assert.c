@@ -15,13 +15,3 @@ int line
 							expr, file, line);
   abort();
 }
-
-/* Non-ANSI version */
-void __assert(file, line)
-char *file;
-int line;
-{
-  fprintf(stderr, "Assertion error in file \"%s\" on line %u\n", file, line);
-  abort();
-}
-

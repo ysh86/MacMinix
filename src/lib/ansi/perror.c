@@ -49,8 +49,7 @@ char *sys_errlist[] = {
 
 int sys_nerr = sizeof(sys_errlist) / sizeof(char *);
 
-void perror(s)
-_CONST char *s;
+void perror(const char *s)
 {
   if (errno < 0 || errno >= sizeof(sys_errlist) / sizeof(char *)) {
 	write(2, "Invalid errno\n", 14);

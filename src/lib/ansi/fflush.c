@@ -2,8 +2,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int fflush(iop)
-FILE *iop;
+int fflush(FILE *iop)
 {
   int count;
 

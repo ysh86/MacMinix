@@ -14,14 +14,14 @@
 #undef strtoul
 #endif
 
-PUBLIC unsigned long strtoul(
+unsigned long strtoul(
 const char *nptr,
 char **endptr,
 int base
 ){
   register int c;
-  unsigned long int result = 0L;
-  unsigned long int limit;
+  unsigned long result = 0L;
+  unsigned long limit;
   int negative = 0;
   int overflow = 0;
   int saw_a_digit = 0;			/* it's not a number without a digit */
@@ -72,7 +72,7 @@ int base
 		result = base * result;
 		if (c > ULONG_MAX - result)
 			overflow = 1;
-		else	
+		else
 			result += c;
 	}
   }

@@ -38,7 +38,7 @@ extern struct _io_buf {
 #define FILE struct _io_buf
 
 
-#define stdin  (_io_table[0])	
+#define stdin  (_io_table[0])
 #define stdout 	(_io_table[1])
 #define stderr 	(_io_table[2])
 

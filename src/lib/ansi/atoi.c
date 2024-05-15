@@ -12,8 +12,7 @@
 #undef atoi
 #endif
 
-PUBLIC int atoi(nptr)
-register _CONST char *nptr;
+int atoi(const char *nptr)
 {
   register int c;
   int result = 0;
