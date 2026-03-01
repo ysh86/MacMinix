@@ -1,13 +1,14 @@
 #include <mac/Events.h>
+#include <mac/Other.h>
 
 /*
  * NOT IN ROM Routines.
  */
 
-void FlushEvents(emask, smask)
-short emask;
-short smask;
-{
+void FlushEvents(
+short emask,
+short smask
+){
   unsigned long mask = smask & 0xFFFF;
   mask <<= 16;
   mask |= (emask & 0xFFFF);
@@ -20,8 +21,7 @@ QHdrPtr GetEvQHdr()
   return &EventQueue;
 }
 
-void SetEventMask(theMask)
-short theMask;
+void SetEventMask(short theMask)
 {
   extern short SysEvtMask;
   SysEvtMask = theMask;

@@ -23,8 +23,7 @@ void ResetAlrtStage()
    ACount = 0;
 }
 
-void SetDAFont(fontNum)
-short fontNum;
+void SetDAFont(short fontNum)
 {
    extern short DlgFont;
    DlgFont = fontNum;
