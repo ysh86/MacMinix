@@ -15,14 +15,14 @@ PRIVATE unshort Timeout = 300;	/* default timeout = 30 seconds */
 
 PRIVATE message mess;
 
-PUBLIC unshort trans(h1, b1, c1, h2, b2, c2)
-header *h1;
-bufptr b1;
-unshort c1;
-header *h2;
-bufptr b2;
-unshort c2;
-{
+PUBLIC unshort trans(
+header *h1,
+bufptr b1,
+unshort c1,
+header *h2,
+bufptr b2,
+unshort c2
+){
   int r;
   Trpar params;
 
@@ -45,11 +45,11 @@ unshort c2;
 }
 
 
-PUBLIC unshort getreq(h, b, c)
-header *h;
-bufptr b;
-unshort c;
-{
+PUBLIC unshort getreq(
+header *h,
+bufptr b,
+unshort c
+){
   int r;
   Trpar params;
 
@@ -68,11 +68,11 @@ unshort c;
 }
 
 
-PUBLIC unshort putrep(h, b, c)
-header *h;
-bufptr b;
-unshort c;
-{
+PUBLIC unshort putrep(
+header *h,
+bufptr b,
+unshort c
+){
   int r;
   Trpar params;
 
@@ -91,8 +91,7 @@ unshort c;
 }
 
 
-PUBLIC unshort timeout(t)	/* set locate timeout in milliseconds */
-unshort t;
+PUBLIC unshort timeout(unshort t)	/* set locate timeout in milliseconds */
 {
   unshort oldtimeout = Timeout;
 

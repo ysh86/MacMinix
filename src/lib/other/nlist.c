@@ -18,10 +18,10 @@
  * n_value/n_sclass fields set to 0.  Nl ends with a 0 or nul string n_name.
  * The return value is -1 on failure, else the number of entries not found.
  */
-int nlist(file, nl)
-char *file;
-struct nlist nl[];
-{
+int nlist(
+char *file,
+struct nlist nl[]
+){
 	int nents, nsrch, nfound, i;
 	struct nlist nlent;
 	FILE *fp;

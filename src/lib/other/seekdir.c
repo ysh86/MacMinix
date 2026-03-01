@@ -16,10 +16,10 @@ typedef int bool;		/* Boolean data type */
 #define	false	0
 #define	true	1
 
-void seekdir(dirp, loc)
-register DIR *dirp;		/* stream from opendir() */
-register off_t loc;		/* position from telldir() */
-{
+void seekdir(
+register DIR *dirp,		/* stream from opendir() */
+register off_t loc		/* position from telldir() */
+){
   register bool rewind;		/* "start over when stymied" flag */
 
   if (dirp == DULL || dirp->dd_buf == (char *)NULL || dirp->dd_magic != _DIR_MAGIC) {

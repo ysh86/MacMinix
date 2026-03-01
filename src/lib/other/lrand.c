@@ -29,8 +29,7 @@
 
 PRIVATE long _lseed = 1L;
 
-long seed(lseed)
-long lseed;
+long seed(long lseed)
 {
   long previous_seed = _lseed;
 

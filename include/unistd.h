@@ -68,6 +68,7 @@ _PROTOTYPE( void _exit, (int _status)					);
 _PROTOTYPE( int access, (char *_path, int _amode)			);
 _PROTOTYPE( int chdir, (char *_path)					);
 _PROTOTYPE( int chown, (char *_path, int _owner, int _group)		);
+_PROTOTYPE( int chroot, (const char *_name)					);
 _PROTOTYPE( int close, (int _fd)					);
 _PROTOTYPE( char *ctermid, (char *_s)					);
 _PROTOTYPE( char *cuserid, (char *_s)					);

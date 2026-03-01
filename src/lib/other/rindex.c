@@ -3,7 +3,8 @@
 
 #include <string.h>
 
-char *rindex(	/* found char, or NULL if none */
+/* found char, or NULL if none */
+char *rindex(
 const char *s,
 char charwanted
 ){

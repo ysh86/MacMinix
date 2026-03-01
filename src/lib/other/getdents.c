@@ -147,8 +147,8 @@ extern int _getdents();		/* actual system call */
 
 PRIVATE _PROTOTYPE( int NameLen, (char *name));
 
-PRIVATE int NameLen(name)	/* return # chars in embedded name */
-char name[];			/* -> name embedded in struct direct */
+/* return # chars in embedded name */
+PRIVATE int NameLen(char name[])		/* -> name embedded in struct direct */
 {
   register char *s;		/* -> name[.] */
   register char *stop = &name[NAME_MAX];	/* -> past end of name field */
@@ -182,8 +182,7 @@ PRIVATE enum {
 
 /*ARGSUSED*/
 PRIVATE RET_SIG
- sig_catch(sig)
-int sig;			/* must be SIGSYS */
+ sig_catch(int sig)		/* must be SIGSYS */
 {
   state = no;			/* attempted _getdents() faulted */
 #ifdef INT_SIGS
@@ -193,12 +192,12 @@ int sig;			/* must be SIGSYS */
 
 #endif				/* UNK */
 
-int getdents(fildes, buf, nbyte)/* returns # bytes read; 0 on EOF, -1 on
-			 * error */
-int fildes;			/* directory file descriptor */
-char *buf;			/* where to put the (struct dirent)s */
-unsigned nbyte;			/* size of buf[] */
-{
+/* returns # bytes read; 0 on EOF, -1 on * error */
+int getdents(
+int fildes,			/* directory file descriptor */
+char *buf,			/* where to put the (struct dirent)s */
+unsigned nbyte			/* size of buf[] */
+){
   int serrno;			/* entry errno */
   off_t offset;			/* initial directory file offset */
   /* The following are PRIVATE just to keep the stack small. */

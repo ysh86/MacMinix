@@ -3,8 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-char *mktemp(template)
-char *template;
+char *mktemp(char *template)
 {
   int pid;
   char *p;

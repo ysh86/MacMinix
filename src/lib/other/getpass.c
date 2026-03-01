@@ -6,8 +6,7 @@
 
 PRIVATE char pwdbuf[9];
 
-char *getpass(prompt)
-char *prompt;
+char *getpass(char *prompt)
 {
   int i = 0, save;
   struct sgttyb tty;

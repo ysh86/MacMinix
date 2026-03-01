@@ -15,8 +15,8 @@
 #define	SEEK_CUR	1
 #endif
 
-off_t telldir(dirp)		/* return offset of next entry */
-DIR *dirp;			/* stream from opendir() */
+/* return offset of next entry */
+off_t telldir(DIR *dirp) /* stream from opendir() */
 {
   if (dirp == DULL || dirp->dd_buf == (char *)NULL || dirp->dd_magic != _DIR_MAGIC)
 	if (dirp == DULL || dirp->dd_buf == (char *) NULL) {

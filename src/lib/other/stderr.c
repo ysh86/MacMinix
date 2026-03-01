@@ -2,8 +2,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void std_err(s)
-char *s;
+void std_err(char *s)
 {
   register char *p = s;
 

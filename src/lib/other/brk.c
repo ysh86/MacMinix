@@ -3,8 +3,7 @@
 
 extern char *brksize;
 
-PUBLIC char *brk(addr)
-char *addr;
+PUBLIC char *brk(char *addr)
 {
   if (callm1(MM, BRK, 0, 0, 0, addr, NIL_PTR, NIL_PTR) == 0) {
 	brksize = _M.m2_p1;
@@ -15,8 +14,7 @@ char *addr;
 }
 
 
-PUBLIC char *sbrk(incr)
-int incr;
+PUBLIC char *sbrk(int incr)
 {
   char *newsize, *oldsize;
 

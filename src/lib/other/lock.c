@@ -19,8 +19,8 @@ typedef enum {
 
 PRIVATE _PROTOTYPE( char *lockpath, (char *name));
 
-BOOLEAN lock(name)		/* acquire lock */
-char *name;
+/* acquire lock */
+BOOLEAN lock(char *name)
 {
   char *path;
   int fd, tries;
@@ -38,14 +38,14 @@ char *name;
   return(True);
 }
 
-void unlock(name)		/* free lock */
-char *name;
+/* free lock */
+void unlock(char *name)
 {
   if (unlink(lockpath(name)) == -1) syserr("unlock");
 }
 
-PRIVATE char *lockpath(name)	/* generate lock file path */
-char *name;
+/* generate lock file path */
+PRIVATE char *lockpath(char *name)
 {
   PRIVATE char path[20];
 

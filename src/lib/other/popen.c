@@ -7,8 +7,7 @@
 
 PRIVATE int pids[20];
 
-FILE *popen(command, type)
-char *command, *type;
+FILE *popen(char *command, char *type)
 {
   int piped[2];
   int Xtype = *type == 'r' ? 0 : *type == 'w' ? 1 : 2;
@@ -38,8 +37,7 @@ char *command, *type;
   return(fdopen(piped[Xtype], type));
 }
 
-int pclose(iop)
-FILE *iop;
+int pclose(FILE *iop)
 {
   int fd = fileno(iop);
   int status, wret;

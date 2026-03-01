@@ -7,13 +7,13 @@
 
 #include <stddef.h>
 
-char *lsearch(key, base, count, width, keycmp)
-char *key;
-char *base;
-unsigned *count;
-unsigned width;
-_PROTOTYPE( int (*keycmp), (const void *, const void *));
-{
+char *lsearch(
+char *key,
+char *base,
+unsigned *count,
+unsigned width,
+_PROTOTYPE( int (*keycmp), (const void *, const void *))
+){
   char *entry;
   char *last = base + *count * width;
 
@@ -26,13 +26,13 @@ _PROTOTYPE( int (*keycmp), (const void *, const void *));
 }
 
 
-char *lfind(key, base, count, width, keycmp)
-char *key;
-char *base;
-unsigned *count;
-unsigned width;
-_PROTOTYPE( int (*keycmp), (const void *, const void *));
-{
+char *lfind(
+char *key,
+char *base,
+unsigned *count,
+unsigned width,
+_PROTOTYPE( int (*keycmp), (const void *, const void *))
+){
   char *entry;
   char *last = base + *count * width;
 

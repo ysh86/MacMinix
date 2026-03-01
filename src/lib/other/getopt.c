@@ -79,11 +79,11 @@ int optopt;
 
 PRIVATE char *scan = (char *)NULL;	/* Private scan pointer. */
 
-int getopt(argc, argv, optstring)
-int argc;
-char *argv[];
-char *optstring;
-{
+int getopt(
+int argc,
+char *argv[],
+char *optstring
+){
   register char c;
   register char *place;
 

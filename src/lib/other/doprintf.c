@@ -20,11 +20,11 @@ PRIVATE _PROTOTYPE( char *_itoa, (char *p, unsigned num, int radix));
 PRIVATE _PROTOTYPE( char *ltoa, (char *p, unsigned long num, int radix));
 #endif
 
-PRIVATE char *_itoa(p, num, radix)
-register char *p;
-register unsigned int num;
-register radix;
-{
+PRIVATE char *_itoa(
+register char *p,
+register unsigned int num,
+register radix
+){
   register i;
   register char *q;
 
@@ -43,11 +43,11 @@ register radix;
 }
 
 #ifndef NO_LONGD
-PRIVATE char *ltoa(p, num, radix)
-register char *p;
-register unsigned long num;
-register radix;
-{
+PRIVATE char *ltoa(
+register char *p,
+register unsigned long num,
+register radix
+){
   register i;
   register char *q;
 

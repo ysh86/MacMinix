@@ -5,8 +5,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-void uniqport(p)
-port *p;
+void uniqport(port *p)
 {
   register char *c;
   register short r;

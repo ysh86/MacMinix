@@ -9,17 +9,17 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-PRIVATE _PROTOTYPE( void put, (int ch));
+PRIVATE _PROTOTYPE( void put, (char ch));
 
 #define TRUNC_SIZE 128
 char Buf[TRUNC_SIZE], *Bufp;
 
 #define OUT 1
 
-void prints(s, arglist)
-_CONST register char *s;
-int *arglist;
-{
+void prints(
+_CONST register char *s,
+int *arglist
+){
   register w;
   int k, *valp;
   char *p, *p1, c;
@@ -63,8 +63,7 @@ int *arglist;
   write(OUT, Buf, (int) (Bufp - Buf));	/* write everything in one blow. */
 }
 
-PRIVATE void put(c)
-char c;
+PRIVATE void put(char c)
 {
   if (Bufp < &Buf[TRUNC_SIZE]) *Bufp++ = c;
 }
