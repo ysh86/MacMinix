@@ -13,8 +13,7 @@ PRIVATE void _alfun()
 {				/* Used with sleep() below */
 }
 
-unsigned sleep(secs)
-unsigned secs;
+unsigned sleep(unsigned secs)
 {
   unsigned current_secs;
   unsigned remaining_secs;

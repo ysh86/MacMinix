@@ -11,8 +11,7 @@
 #include <unistd.h>
 #include <time.h>
 
-PUBLIC long int sysconf(name)
-int name;			/* property being inspected */
+PUBLIC long int sysconf(int name) /* property being inspected */
 {
   switch(name) {
 	case _SC_ARG_MAX:

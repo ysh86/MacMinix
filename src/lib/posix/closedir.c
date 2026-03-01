@@ -15,8 +15,7 @@ typedef char *pointer;		/* (void *) if you have it */
 #define DULL (DIR *) NULL
 #define CULL (char *) NULL
 
-int closedir(dirp)
-register DIR *dirp;		/* stream from opendir() */
+int closedir(register DIR *dirp) /* stream from opendir() */
 {
   register int fd;
 

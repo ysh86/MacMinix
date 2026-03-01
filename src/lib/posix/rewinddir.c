@@ -18,8 +18,7 @@
 #define	SEEK_SET	0
 #endif
 
-void rewinddir(dirp)
-register DIR *dirp;		/* stream from opendir() */
+void rewinddir(register DIR *dirp) /* stream from opendir() */
 {
   if (dirp == DULL || dirp->dd_buf == CULL || dirp->dd_magic != _DIR_MAGIC) {
 	errno = EFAULT;

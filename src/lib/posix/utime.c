@@ -5,10 +5,10 @@
 #include <time.h>
 #include <utime.h>
 
-PUBLIC int utime(name, timp)
-char *name;
-struct utimbuf *timp;
-{
+PUBLIC int utime(
+char *name,
+struct utimbuf *timp
+){
   long current_time;
 
   if (timp == (struct utimbuf *)NULL) {

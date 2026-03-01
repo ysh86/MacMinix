@@ -1,7 +1,6 @@
 #include <lib.h>
 
-PUBLIC int pipe(fild)
-int fild[2];
+PUBLIC int pipe(int fild[2])
 {
   int k;
   k = callm1(FS, PIPE, 0, 0, 0, NIL_PTR, NIL_PTR, NIL_PTR);

@@ -2,8 +2,7 @@
 #include <sgtty.h>
 #include <minix/com.h>
 
-int isatty(fd)
-int fd;
+int isatty(int fd)
 {
   _M.TTY_REQUEST = TIOCGETP;
   _M.TTY_LINE = fd;

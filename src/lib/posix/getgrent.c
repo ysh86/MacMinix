@@ -30,7 +30,7 @@ PRIVATE int _bufcnt;
 PRIVATE struct group _grp;
 
 PRIVATE _PROTOTYPE( int getline, (void));
-PRIVATE _PROTOTYPE( void skip_period, (int c));
+PRIVATE _PROTOTYPE( void skip_period, (char c));
 
 PUBLIC int setgrent()
 {
@@ -74,8 +74,7 @@ PRIVATE int getline()
   return(1);
 }
 
-PRIVATE void skip_period(c)
-char c;
+PRIVATE void skip_period(char c)
 {
   while ((*_buf) && (*_buf != c)) _buf++;
   if (*_buf) *_buf++ = '\0';
@@ -102,8 +101,7 @@ PUBLIC struct group *getgrent()
   return(&_grp);
 }
 
-struct group *getgrnam(name)
-char *name;
+struct group *getgrnam(char *name)
 {
   struct group *grp;
 
@@ -117,8 +115,7 @@ char *name;
 	return((struct group *)NULL);
 }
 
-struct group *getgrgid(gid)
-gid_t gid;
+struct group *getgrgid(gid_t gid)
 {
   struct group *grp;
 

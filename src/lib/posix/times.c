@@ -3,8 +3,7 @@
 #include <time.h>
 #include <sys/times.h>
 
-PUBLIC clock_t times(buf)
-struct tms *buf;
+PUBLIC clock_t times(struct tms *buf)
 {
   clock_t k;
   k = (clock_t)callm1(FS, TIMES, 0, 0, 0, NIL_PTR, NIL_PTR, NIL_PTR);

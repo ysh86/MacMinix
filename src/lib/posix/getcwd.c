@@ -15,11 +15,11 @@
 
 static void go_back(char *path);
 
-char *getcwd(buffer, size)
-char *buffer;
-int size;
 /* Get current working directory. */
-{
+char *getcwd(
+char *buffer,
+int size
+){
   int same_device, found, fd;
   char *r, path[PATH_MAX + 1], temp_name[NAME_MAX + 1];
   struct stat current, parent, dir_entry;

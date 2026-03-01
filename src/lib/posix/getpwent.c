@@ -97,8 +97,7 @@ PUBLIC struct passwd *getpwent()
   return(&_pwd);
 }
 
-PUBLIC struct passwd *getpwnam(__name)
-char *__name;
+PUBLIC struct passwd *getpwnam(char *__name)
 {
   struct passwd *pwd;
 
