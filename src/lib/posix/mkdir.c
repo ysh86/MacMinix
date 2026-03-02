@@ -2,7 +2,7 @@
 
 PUBLIC int mkdir(
 char *name,
-int mode
+mode_t mode
 ){
   return(callm1(FS, MKDIR, len(name), mode, 0, name, NIL_PTR, NIL_PTR));
 }

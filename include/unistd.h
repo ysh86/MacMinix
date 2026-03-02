@@ -67,8 +67,8 @@
 _PROTOTYPE( void _exit, (int _status)					);
 _PROTOTYPE( int access, (char *_path, int _amode)			);
 _PROTOTYPE( int chdir, (char *_path)					);
-_PROTOTYPE( int chown, (char *_path, int _owner, int _group)		);
-_PROTOTYPE( int chroot, (const char *_name)					);
+_PROTOTYPE( int chown, (char *_path, uid_t _owner, gid_t _group)	);
+_PROTOTYPE( int chroot, (const char *_name)				);
 _PROTOTYPE( int close, (int _fd)					);
 _PROTOTYPE( char *ctermid, (char *_s)					);
 _PROTOTYPE( char *cuserid, (char *_s)					);
@@ -82,7 +82,7 @@ _PROTOTYPE( int execve, (const char *_path, char *const _argv[], char *const _en
 _PROTOTYPE( int execvp, (const char *_file, char *_argv[])		);
 _PROTOTYPE( pid_t fork, (void)						);
 _PROTOTYPE( long fpathconf, (int _fd, int _name)			);
-_PROTOTYPE( char *getcwd, (char *_buf, int _size)			);
+_PROTOTYPE( char *getcwd, (char *_buf, size_t _size)			);
 _PROTOTYPE( gid_t getegid, (void)					);
 _PROTOTYPE( uid_t geteuid, (void)					);
 _PROTOTYPE( gid_t getgid, (void)					);
@@ -100,18 +100,18 @@ _PROTOTYPE( off_t lseek, (int _fd, off_t _offset, int _whence)		);
 _PROTOTYPE( long pathconf, (char *_path, int _name)			);
 _PROTOTYPE( int pause, (void)						);
 _PROTOTYPE( int pipe, (int _fildes[2])					);
-_PROTOTYPE( int read, (int _fd, char *_buf, unsigned int _n)		);
+_PROTOTYPE( int read, (int _fd, char *_buf, size_t _n)			);
 _PROTOTYPE( int rmdir, (char *_path)					);
-_PROTOTYPE( int setgid, (int _gid)					);
+_PROTOTYPE( int setgid, (gid_t _gid)					);
 _PROTOTYPE( int setpgid, (pid_t _pid, pid_t _pgid)			);
 _PROTOTYPE( pid_t setsid, (void)					);
-_PROTOTYPE( int setuid, (int _uid)					);
+_PROTOTYPE( int setuid, (uid_t _uid)					);
 _PROTOTYPE( long sysconf, (int _name)					);
 _PROTOTYPE( pid_t tcgetpgrp, (int _fd)					);
 _PROTOTYPE( int tcsetpgrp, (int _fd, pid_t _pgrp_id)			);
 _PROTOTYPE( char *ttyname, (int _fd)					);
 _PROTOTYPE( int unlink, (const char *_path)				);
-_PROTOTYPE( int write, (int _fd, char *_buf, unsigned int _n)		);
+_PROTOTYPE( int write, (int _fd, char *_buf, size_t _n)			);
 
 #ifdef _MINIX
 _PROTOTYPE( char *brk, (char *_addr)					);

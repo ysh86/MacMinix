@@ -14,9 +14,9 @@ struct stat {
   dev_t st_dev;			/* major/minor device number */
   ino_t st_ino;			/* i-node number */
   mode_t st_mode;		/* file mode, protection bits, etc. */
-  short int st_nlink;		/* # links; TEMPORARY HACK: should be nlink_t*/
+  nlink_t st_nlink;		/* # links */
   uid_t st_uid;			/* uid of the file's owner */
-  short int st_gid;		/* gid; TEMPORARY HACK: should be gid_t */
+  gid_t st_gid;			/* gid */
   dev_t st_rdev;
   off_t st_size;		/* file size */
   time_t st_atime;		/* time of last access */
@@ -48,7 +48,7 @@ struct stat {
 #define S_IXGRP   00010		/* group:  -----x--- */
 
 #define S_IRWXO   00007		/* others: ------rwx */
-#define S_IROTH   00004		/* others: ------r-- */ 
+#define S_IROTH   00004		/* others: ------r-- */
 #define S_IWOTH   00002		/* others: -------w- */
 #define S_IXOTH   00001		/* others: --------x */
 
@@ -65,11 +65,11 @@ struct stat {
 #include <ansi.h>
 #endif
 
-_PROTOTYPE( int chmod, (const char *_path, int _mode)			);
-_PROTOTYPE( int fstat, (int _fildes, struct stat *_buf)			);
-_PROTOTYPE( int mkdir, (const char *_path, int _mode)			);
-_PROTOTYPE( int mkfifo, (const char *_path, int _mode)			);
-_PROTOTYPE( int stat , (const char *_path, struct stat *_buf)		);
-_PROTOTYPE( mode_t umask, (int _cmask)					);
+_PROTOTYPE( int chmod, (const char *_path, mode_t _mode)			);
+_PROTOTYPE( int fstat, (int _fildes, struct stat *_buf)				);
+_PROTOTYPE( int mkdir, (const char *_path, mode_t _mode)			);
+_PROTOTYPE( int mkfifo, (const char *_path, mode_t _mode)			);
+_PROTOTYPE( int stat , (const char *_path, struct stat *_buf)			);
+_PROTOTYPE( mode_t umask, (mode_t _cmask)					);
 
 #endif /* _STAT_H */

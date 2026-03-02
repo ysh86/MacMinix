@@ -18,7 +18,7 @@ static void go_back(char *path);
 /* Get current working directory. */
 char *getcwd(
 char *buffer,
-int size
+size_t size
 ){
   int same_device, found, fd;
   char *r, path[PATH_MAX + 1], temp_name[NAME_MAX + 1];
