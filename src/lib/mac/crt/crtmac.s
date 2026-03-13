@@ -12,8 +12,6 @@
 	.extern	_end
 
 	.define	EXIT
-	.define	.trpim
-	.define	.trppc
 	.define	_qd
 	.define	saveda5
 	.define	savedsp
@@ -37,14 +35,12 @@ start: 	lea 	0(pc),a0
 	sub.l	#210,a0
 	move.l	a0,_qd
 	move.l 	#0,-(sp)
-	move.w 	#0,-(sp)
+	move.l 	#0,-(sp)
 	jsr	_main
-	add.l	#6,sp
-EXIT:	.data2  0xa9f4
+	add.l	#8,sp
+EXIT:	.data2  0xa9f4		! ExitToShell()
 
 	.sect	.data
 _qd:	.data4	0
-.trpim:	.data2	0
-.trppc:	.data4	0
 saveda5:.data4	0
 savedsp:.data4	0

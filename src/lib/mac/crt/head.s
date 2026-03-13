@@ -5,11 +5,6 @@
 	.define	begbss
 	.define	_exit
 	.define	_data_org
-#ifdef ACK
-	.define	EXIT
-	.define	.trpim
-	.define	.trppc
-#endif ACK
 ! external references
 	.extern	_main
 	.extern	_stackpt
@@ -24,15 +19,12 @@
 begtext:
 	move.l	_stackpt,sp
 	jsr	_main
-#ifdef ACK
-EXIT:
-#endif ACK
 _exit:
 	bra	_exit		! this will never be executed
 
 	.define	_start_click
 _start_click:
-	move.w	_data_org+2,d0
+	move.l	_data_org+2,d0
 	rts
 
 	.sect	.data
@@ -42,10 +34,6 @@ _data_org:
 	! 0xDADA is magic number for build
 	.data2	0xDADA,0,0,0,0,0,0,0
 	.data2	0,0,0,0,0,0,0,0
-#ifdef ACK
-.trpim:	.data2	0
-.trppc:	.data4	0
-#endif ACK
 
 	.sect	.bss
 begbss:

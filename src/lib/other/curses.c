@@ -104,7 +104,7 @@ void clrtobot()
 
 void standout()
 {
-  mode = BOLD;
+  mode = (char)BOLD;
 }
 
 void standend()

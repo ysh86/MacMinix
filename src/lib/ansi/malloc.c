@@ -14,7 +14,7 @@ static void assert_failed(void);
 #define	ASSERT(b)		/* empty */
 #endif
 
-#define	ptrint		long
+#define	ptrint		size_t
 
 #define BRKSIZE		1024
 #define	PTRSIZE		sizeof(char *)
@@ -106,7 +106,7 @@ size_t size
   register size_t len, n;
   char *old = (char *) oldfix;
 
-  if (size > -2 * PTRSIZE) return(0);
+  if (size > (size_t)(-2 * (int)PTRSIZE)) return(0);
   len = Align(size, PTRSIZE) + PTRSIZE;
   next = NextSlot(old);
   n = (int) (next - old);	/* old length */

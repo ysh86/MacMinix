@@ -91,7 +91,7 @@ long   segsizes[]
     struct relocation_info *ptrs[2];
     long   adjust, i, j, sizes[2];
     register struct relocation_info *rel;
-    int cnt;
+    long cnt;
     register char *address;
     char *text, *start[2];
     long datum;
