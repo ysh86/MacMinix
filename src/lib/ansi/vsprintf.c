@@ -19,3 +19,14 @@ void *argp
 
   return(buf);
 }
+
+
+int vfprintf(
+FILE *file,
+const char *fmt,
+void *args
+){
+  _doprintf(file, fmt, args);
+  if (testflag(file, PERPRINTF)) fflush(file);
+  return 0;  /* WRONG, but a right way requires _doprintf to return the length output */
+}
