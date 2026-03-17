@@ -23,7 +23,9 @@
 #define STDERR_FILENO      2	/* file descriptor for stderr */
 
 /* NULL must be defined in <unistd.h> according to POSIX Sec. 2.8.1. */
+#ifndef NULL
 #define NULL    ((void *)0)
+#endif
 
 /* The following relate to configurable system variables. POSIX Table 4-2. */
 #define _SC_ARG_MAX		1
@@ -63,6 +65,8 @@
 #ifndef _ANSI_H
 #include <ansi.h>
 #endif
+
+#include <sys/types.h>
 
 _PROTOTYPE( void _exit, (int _status)					);
 _PROTOTYPE( int access, (char *_path, int _amode)			);
@@ -106,6 +110,7 @@ _PROTOTYPE( int setgid, (gid_t _gid)					);
 _PROTOTYPE( int setpgid, (pid_t _pid, pid_t _pgid)			);
 _PROTOTYPE( pid_t setsid, (void)					);
 _PROTOTYPE( int setuid, (uid_t _uid)					);
+_PROTOTYPE( int sync, (void)						);
 _PROTOTYPE( long sysconf, (int _name)					);
 _PROTOTYPE( pid_t tcgetpgrp, (int _fd)					);
 _PROTOTYPE( int tcsetpgrp, (int _fd, pid_t _pgrp_id)			);

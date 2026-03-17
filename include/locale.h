@@ -27,7 +27,9 @@ struct lconv {
   char n_sign_posn;		/* CHAR_MAX */
 };
 
+#ifndef NULL
 #define NULL    ((void *)0)
+#endif
 
 #define LC_ALL             1
 #define LC_COLLATE         2

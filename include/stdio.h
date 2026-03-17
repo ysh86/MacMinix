@@ -3,13 +3,12 @@
 #ifndef _STDIO_H
 #define _STDIO_H
 
-#ifdef NULL
-#undef NULL
+#ifndef NULL
+#define NULL    ((void *)0)
 #endif
 
 #define BUFSIZ  1024
 #define NFILES  20
-#define NULL       0
 #define EOF     (-1)
 #define CMASK   0377
 
@@ -171,5 +170,8 @@ extern FILE	*freopen();
 extern long	ftell();
 extern char	*fgets();
 extern char	*gets();
+
+/* Minix specific */
+void std_err(char *s);
 
 #endif /* _STDIO_H */
