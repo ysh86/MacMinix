@@ -5,7 +5,7 @@
 
 char *mktemp(char *template)
 {
-  int pid;
+  pid_t pid;
   char *p;
 
   pid = getpid();		/* get process id as semi-unique number */

@@ -5,13 +5,13 @@
 #include <unistd.h>
 #include <stdio.h>
 
-PRIVATE int pids[20];
+PRIVATE pid_t pids[20];
 
 FILE *popen(char *command, char *type)
 {
   int piped[2];
   int Xtype = *type == 'r' ? 0 : *type == 'w' ? 1 : 2;
-  int pid;
+  pid_t pid;
   extern FILE *fdopen();
 
   if (Xtype == 2 ||
@@ -21,7 +21,7 @@ FILE *popen(char *command, char *type)
 
   if (pid == 0) {
 	/* Child */
-	register int *p;
+	register pid_t *p;
 
 	for (p = pids; p < &pids[20]; p++) {
 		if (*p) close((int)(p - pids));
@@ -40,7 +40,8 @@ FILE *popen(char *command, char *type)
 int pclose(FILE *iop)
 {
   int fd = fileno(iop);
-  int status, wret;
+  int status;
+  pid_t wret;
   void (*intsave) () = signal(SIGINT, SIG_IGN);
   void (*quitsave) () = signal(SIGQUIT, SIG_IGN);
   void (*hupsave) () = signal(SIGHUP, SIG_IGN);

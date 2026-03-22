@@ -1,7 +1,7 @@
 #include <lib.h>
 
 PUBLIC long ptrace(
-int req, int pid,
+int req, pid_t pid,
 long addr, long data
 ){
   _M.m2_i1 = pid;

@@ -14,8 +14,10 @@ struct stat {
   dev_t st_dev;			/* major/minor device number */
   ino_t st_ino;			/* i-node number */
   mode_t st_mode;		/* file mode, protection bits, etc. */
+  nlink_t _st_nlink;
   nlink_t st_nlink;		/* # links */
   uid_t st_uid;			/* uid of the file's owner */
+  gid_t _st_gid;
   gid_t st_gid;			/* gid */
   dev_t st_rdev;
   off_t st_size;		/* file size */

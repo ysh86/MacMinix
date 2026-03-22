@@ -172,6 +172,6 @@ extern char	*fgets();
 extern char	*gets();
 
 /* Minix specific */
-void std_err(char *s);
+void std_err(const char *s);
 
 #endif /* _STDIO_H */

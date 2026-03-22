@@ -2,9 +2,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void std_err(char *s)
+void std_err(const char *s)
 {
-  register char *p = s;
+  register const char *p = s;
 
   while (*p != 0) p++;
   write(2, s, (int) (p - s));

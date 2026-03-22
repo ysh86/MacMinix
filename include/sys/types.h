@@ -29,7 +29,7 @@ typedef unsigned short	ino_t;	  /* i-node number */
 typedef unsigned short	mode_t;	  /* mode number within an i-node */
 typedef unsigned char	nlink_t;  /* number-of-links field within an i-node */
 typedef long		off_t;	  /* offsets within a file */
-typedef int		pid_t;	  /* type for pids (must be signed) */
+typedef short		pid_t;	  /* type for pids (must be signed) */
 typedef unsigned short	uid_t;	  /* user id */
 
 #endif /* _TYPES_H */

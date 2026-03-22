@@ -56,7 +56,7 @@ PUBLIC void sys_fork(
 #if (CHIP == M68000)
 int parent,			/* proc doing the fork */
 int child,			/* which proc has been created by the fork */
-int pid,			/* process id assigned by MM */
+pid_t pid,			/* process id assigned by MM */
 #ifdef ALCYON_C_BUG_FIXED
 phys_clicks shadow		/* memory allocated for shadow */
 #else
@@ -65,7 +65,7 @@ int shadow
 #else
 int parent,			/* proc doing the fork */
 int child,			/* which proc has been created by the fork */
-int pid			/* process id assigned by MM */
+pid_t pid			/* process id assigned by MM */
 #endif
 ){
 /* A proc has forked.  Tell the kernel. */
