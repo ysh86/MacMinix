@@ -118,6 +118,10 @@ _PROTOTYPE( char *ttyname, (int _fd)					);
 _PROTOTYPE( int unlink, (const char *_path)				);
 _PROTOTYPE( int write, (int _fd, char *_buf, size_t _n)			);
 
+_PROTOTYPE( int getopt, (int _argc, char *const _argv[], const char *optstring));
+extern char *optarg;
+extern int optind, opterr, optopt;
+
 #ifdef _MINIX
 _PROTOTYPE( char *brk, (char *_addr)					);
 _PROTOTYPE( char *mktemp, (char *_template)				);
