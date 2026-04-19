@@ -22,7 +22,7 @@
 	.sect	.text
 	.extern	_main
 start: 	lea 	0(pc),a0
-	sub.l 	#32,a0
+	sub.l 	#32,a0		! size of aout header
 	move.l 	#0,-(sp)
 	move.l 	#0,-(sp)
 	move.l 	a0,-(sp)
@@ -32,7 +32,7 @@ start: 	lea 	0(pc),a0
 	bne	EXIT		! relocation failed
 	move.l	a5,saveda5
 	move.l	a5,a0
-	sub.l	#210,a0
+	sub.l	#210,a0	! size of QuickDraw globals
 	move.l	a0,_qd
 	move.l 	#0,-(sp)
 	move.l 	#0,-(sp)

@@ -58,8 +58,8 @@ struct SFReply {
 #include <ansi.h>
 #endif
 
-ROMPACK(0xA9EA,2) _PROTOTYPE( void SFGetFile, (Point where, inStringPtr prompt, ProcPtr fileFilter, Short numTypes, SFTypeList *typeList, ProcPtr dlgHook, SFReply *reply) );
+ROMPACK(0xA9EA,2) _PROTOTYPE( void SFGetFile, (Point where, inStringPtr prompt, ProcPtr fileFilter, Short numTypes, SFTypeList typeList, ProcPtr dlgHook, SFReply *reply) );
 ROMPACK(0xA9EA,1) _PROTOTYPE( void SFPutFile, (Point where, inStringPtr prompt, inStringPtr origName, ProcPtr dlgHook, SFReply *reply) );
-ROMPACK(0xA9EA,4) _PROTOTYPE( void SFPGetFile, (Point where, inStringPtr prompt, ProcPtr fileFilter, Short numTypes, SFTypeList *typeList, ProcPtr dlgHook, SFReply *reply, Short dlgID, ProcPtr filterProc) );
+ROMPACK(0xA9EA,4) _PROTOTYPE( void SFPGetFile, (Point where, inStringPtr prompt, ProcPtr fileFilter, Short numTypes, SFTypeList typeList, ProcPtr dlgHook, SFReply *reply, Short dlgID, ProcPtr filterProc) );
 ROMPACK(0xA9EA,3) _PROTOTYPE( void SFPPutFile, (Point where, inStringPtr prompt, inStringPtr origName, ProcPtr dlgHook, SFReply *reply, Short dlgID, ProcPtr filterProc) );
 #endif
