@@ -1,11 +1,11 @@
 #include <mac/Segments.h>
+#include <mac/Memory.h>
 
 /*
  * NOT IN ROM Routines.
  */
 
-static AppFile *findidx(index)
-short index;
+static AppFile *findidx(short index)
 {
   extern Handle AppParmHandle;
   short mess, cnt;
@@ -24,8 +24,7 @@ short index;
   return (AppFile *)p;
 }
 
-void ClrAppFiles(index)
-short index;
+void ClrAppFiles(short index)
 {
   extern Handle AppParmHandle;
   AppFile *p;
@@ -34,10 +33,10 @@ short index;
     p->fType = 0;
 }
 
-void CountAppFiles(message, count)
-short *message;
-short *count;
-{
+void CountAppFiles(
+short *message,
+short *count
+){
   extern Handle AppParmHandle;
   short *p;
 
@@ -49,10 +48,10 @@ short *count;
   *count   = *p;
 }
 
-void GetAppFiles(index, theFile)
-short index;
-AppFile *theFile;
-{
+void GetAppFiles(
+short index,
+AppFile *theFile
+){
   short i,len;
   AppFile *p;
 

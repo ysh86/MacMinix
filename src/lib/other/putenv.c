@@ -8,8 +8,7 @@
 
 extern char **environ;
 
-int putenv(name)
-register char *name;
+int putenv(register char *name)
 {
   char **v, **nv, **newenv;
   register char *n;

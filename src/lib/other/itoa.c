@@ -4,8 +4,7 @@
 PRIVATE int next;
 PRIVATE char qbuf[8];
 
-char *itoa(n)
-int n;
+char *itoa(int n)
 {
   register int r, k;
   int flag = 0;

@@ -1,3 +1,5 @@
+#include <string.h>
+
 #define MAXSTRINGS 7
 
 static unsigned char strbuf[MAXSTRINGS][256];
@@ -8,8 +10,7 @@ void _cstringclear()
    strnext = 0;
 }
 
-void _cstringtopstring(s)
-unsigned char **s;
+void _cstringtopstring(unsigned char **s)
 {
    register unsigned char *p, *q;
    int len = 0;
@@ -28,8 +29,7 @@ unsigned char **s;
    strnext++;
 }
 
-void _pstringtocstring(s)
-unsigned char **s;
+void _pstringtocstring(unsigned char **s)
 {
    char *p2cstr();
    *s = (unsigned char *)p2cstr(*s);
@@ -38,8 +38,7 @@ unsigned char **s;
 /*
  * Convert a 4 character string into a ResType.
  */
-void _charpointertorestype(s)
-char **s;
+void _charpointertorestype(char **s)
 {
   int i;
   unsigned long l = 0;
@@ -55,8 +54,7 @@ char **s;
   *(unsigned long *)s = l;
 }
 
-char *p2cstr(s)
-char *s;
+char *p2cstr(char *s)
 {
   long len = s[0];
   register char *p, *q;
@@ -69,8 +67,7 @@ char *s;
   return s;
 }
 
-char *c2pstr(s)
-char *s;
+char *c2pstr(char *s)
 {
   long len = strlen(s);
   register char *p, *q;

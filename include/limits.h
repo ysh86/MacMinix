@@ -20,12 +20,12 @@
 #define SHRT_MAX       32767	/* maximum value of a short */
 #define USHRT_MAX     0xFFFF	/* maximum value of unsigned short */
 
-/* Definitions about ints (16 bits in MINIX for 8088, 80286, Atari etc) */
-#define INT_MIN   (-32767-1)	/* minimum value of an int */
-#define INT_MAX        32767	/* maximum value of an int */
-#define UINT_MAX      0xFFFF	/* maximum value of an unsigned int */
+/* Definitions about ints (32 bits in MINIX). */
+#define INT_MIN (-2147483647-1)	/* minimum value of an int */
+#define INT_MAX     2147483647L	/* maximum value of an int */
+#define UINT_MAX    4294967295L	/* maximum value of an unsigned int */
 
-/*Definitions about longs (32 bits in MINIX). */
+/* Definitions about longs (32 bits in MINIX). */
 #define LONG_MIN (-2147483647-1)/* minimum value of a long */
 #define LONG_MAX  2147483647L	/* maximum value of a long */
 #define ULONG_MAX 4294967295L	/* maximum value of an unsigned long */

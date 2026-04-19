@@ -7,10 +7,10 @@
 #include <limits.h>
 #include <unistd.h>
 
-long fpathconf(fd, name)
-int fd;				/* file descriptor being interrogated */
-int name;			/* property being inspected */
-{
+long fpathconf(
+int fd,				/* file descriptor being interrogated */
+int name			/* property being inspected */
+){
 /* POSIX allows some of the values in <limits.h> to be increased at
  * run time.  The pathconf and fpathconf functions allow these values
  * to be checked at run time.  MINIX does not use this facility.

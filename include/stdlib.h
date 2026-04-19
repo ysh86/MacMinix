@@ -4,7 +4,9 @@
 #define _STDLIB_H
 
 /* The macros are NULL, EXIT_FAILURE, EXIT_SUCCESS, RAND_MAX, and MB_CUR_MAX.*/
+#ifndef NULL
 #define NULL    ((void *)0)
+#endif
 
 #define EXIT_FAILURE       1	/* standard error return using exit() */
 #define EXIT_SUCCESS       0	/* successful return using exit() */
@@ -60,7 +62,7 @@ _PROTOTYPE( void *bsearch,
 	size_t _size, int (*_compar) (const void *, const void *))	);
 _PROTOTYPE( void qsort, (void *_base, size_t _nmemb, size_t _size,
 	int (*_compar) (const void *, const void *))			);
-_PROTOTYPE( unsigned long int strtoul,
-			(const char *_nptr, char **_endptr, int _base)	);
+_PROTOTYPE( unsigned long strtoul,
+	(const char *_nptr, char **_endptr, int _base)			);
 
 #endif /* STDLIB_H */

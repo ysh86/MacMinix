@@ -11,8 +11,7 @@ extern int getdents();		/* SVR3 system call, or emulation */
 #define DULL (DIR *) NULL
 #define CULL (char *) NULL
 
-struct dirent *readdir(dirp)
-register DIR *dirp;		/* stream from opendir() */
+struct dirent *readdir(register DIR *dirp) /* stream from opendir() */
 {
   register struct dirent *dp;	/* -> directory data */
 

@@ -13,7 +13,7 @@
 !		inStringPtr prompt,
 !		ProcPtr fileFilter,
 !		Short numTypes,
-!		SFTypeList *typeList,
+!		SFTypeList typeList,
 !		ProcPtr dlgHook,
 !		SFReply *reply
 !	  );
@@ -106,7 +106,7 @@ LL3:
 !		inStringPtr prompt,
 !		ProcPtr fileFilter,
 !		Short numTypes,
-!		SFTypeList *typeList,
+!		SFTypeList typeList,
 !		ProcPtr dlgHook,
 !		SFReply *reply,
 !		Short dlgID,

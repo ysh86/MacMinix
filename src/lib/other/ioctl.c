@@ -2,11 +2,11 @@
 #include <minix/com.h>
 #include <sgtty.h>
 
-PUBLIC int ioctl(fd, request, argp)
-int fd;
-int request;
-struct sgttyb *argp;
-{
+PUBLIC int ioctl(
+int fd,
+int request,
+struct sgttyb *argp
+){
   int n;
   long erase, kill, intr, quit, xon, xoff, eof, brk, speed;
   struct tchars *argt;

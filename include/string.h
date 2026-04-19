@@ -5,7 +5,9 @@
 #ifndef _STRING_H
 #define _STRING_H
 
+#ifndef NULL
 #define NULL    ((void *)0)
+#endif
 
 #ifndef _SIZE_T
 #define _SIZE_T
@@ -42,8 +44,8 @@ _PROTOTYPE( size_t strlen, (const char *_s)				);
 
 #ifdef _MINIX
 /* For backward compatibility. */
-_PROTOTYPE( char *index, (const char *_s, int _charwanted)		);
-_PROTOTYPE( char *rindex, (const char *_s, int _charwanted)		);
+_PROTOTYPE( char *index, (const char *_s, char _charwanted)		);
+_PROTOTYPE( char *rindex, (const char *_s, char _charwanted)		);
 _PROTOTYPE( void bcopy, (const char *_src, char *_dst, int _length)	);
 _PROTOTYPE( int bcmp, (const char *_s1, const char *_s2, int _length)	);
 _PROTOTYPE( void bzero, (char *_dst, int _length)			);

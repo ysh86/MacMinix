@@ -1,7 +1,7 @@
 #include <lib.h>
 #include <signal.h>
 
-extern void (*__vectab[_NSIG]) ();	/* array of funcs to catch signals */
+extern void (*__vectab[_NSIG]) (int);	/* array of funcs to catch signals */
 
 /* The definition of signal really should be
  *  PUBLIC void (*signal(signr, func))()
@@ -12,18 +12,19 @@ extern void (*__vectab[_NSIG]) ();	/* array of funcs to catch signals */
  * and change ../h/signal.h accordingly.
  */
 
-PUBLIC void (*signal(signr, func)) ()
-int signr;			/* which signal is being set */
-void (*func) ();			/* pointer to function that catches signal */
+void (*signal(
+  int signr,			/* which signal is being set */
+  void (*func) (int)		/* pointer to function that catches signal */
+)) (int)
 {
   int r;
-  void (*old) ();
+  void (*old) (int);
 
   old = __vectab[signr - 1];
   _M.m6_i1 = signr;
   if (func == SIG_IGN || func == SIG_DFL)
 	/* Keep old signal catcher until it is completely de-installed */
-	_M.m6_f1 = (void (*)())func;
+	_M.m6_f1 = (void (*)(int))func;
   else {
 	/* Use new signal catcher immediately (old one may not exist) */
 	__vectab[signr - 1] = func;
@@ -32,7 +33,7 @@ void (*func) ();			/* pointer to function that catches signal */
   r = callx(MM, SIGNAL);
   if (r < 0) {
 	__vectab[signr - 1] = old;/* undo any pre-installation */
-	return((void (*) ()) r);
+	return((void (*)(int)) r);
   }
   __vectab[signr - 1] = func;	/* redo any pre-installation */
   if (r == 1) return(SIG_IGN);

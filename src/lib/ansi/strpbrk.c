@@ -3,12 +3,12 @@
 
 #include <string.h>
 
-char *strpbrk(s, breakat)	/* found char, or NULL if none */
-_CONST char *s;
-_CONST char *breakat;
-{
-  register _CONST char *sscan;
-  register _CONST char *bscan;
+char *strpbrk(	/* found char, or NULL if none */
+const char *s,
+const char *breakat
+){
+  register const char *sscan;
+  register const char *bscan;
 
   for (sscan = s; *sscan != '\0'; sscan++) {
 	for (bscan = breakat; *bscan != '\0';)	/* ++ moved down. */

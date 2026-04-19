@@ -22,9 +22,9 @@ typedef char *pointer;		/* (void *) if you have it */
 #define	S_ISDIR( mode )		(((mode) & S_IFMT) == S_IFDIR)
 #endif
 
-DIR *opendir(dirname)
-char *dirname;			/* name of directory */
-{
+DIR *opendir(
+char *dirname			/* name of directory */
+){
   register DIR *dirp;		/* -> malloc'ed storage */
   register int fd;		/* file descriptor for read */
 

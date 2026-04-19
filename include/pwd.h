@@ -23,7 +23,7 @@ struct passwd {
 
 _PROTOTYPE( void endpwent, (void)					);
 _PROTOTYPE( struct passwd *getpwnam, (char *_name)			);
-_PROTOTYPE( struct passwd *getpwuid, (int _uid)				);
+_PROTOTYPE( struct passwd *getpwuid, (uid_t _uid)			);
 _PROTOTYPE( struct passwd *getpwent, (void)				);
 _PROTOTYPE( int setpwent, (void)					);
 

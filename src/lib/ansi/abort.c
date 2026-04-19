@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void abort()
+void abort(void)
 {
   kill(getpid(), SIGABRT);
 }

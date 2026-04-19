@@ -3,12 +3,12 @@
 
 #include <string.h>
 
-char *strcat(dst, src)
-char *dst;
-_CONST char *src;
-{
+char *strcat(
+char *dst,
+const char *src
+){
   register char *dscan;
-  register _CONST char *sscan;
+  register const char *sscan;
 
   for (dscan = dst; *dscan != '\0'; dscan++) continue;
   sscan = src;

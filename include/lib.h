@@ -25,15 +25,21 @@ extern message _M;
 #define MM                 0
 #define FS                 1
 
-_PROTOTYPE( int _callm1, (int _proc, int _syscallnr,
-			 int _int1, int _int2, int _int3,
-			 char *_ptr1, char *_ptr2, char *_ptr3)		);
-_PROTOTYPE( int _callm3, (int _proc, int _syscallnr, int _int1,
-			 const char *_name)				);
-_PROTOTYPE( int _callx, (int _proc, int _syscallnr)			);
-_PROTOTYPE( int _len, (const char *_s)					);
-_PROTOTYPE( void panic, (const char *_message, int _errnum)		);
-_PROTOTYPE( int _sendrec, (int _src_dest, message *_m_ptr)		);
-_PROTOTYPE( void begsig, (int dummy)					);
+/* lib/other/call.c */
+int callm1 (int _proc, int _syscallnr,
+	int _int1, int _int2, int _int3,
+	char *_ptr1, char *_ptr2, char *_ptr3);
+int callm3 (int _proc, int _syscallnr, int _int1,
+	const char *_name);
+int callx (int _proc, int _syscallnr);
+int len (const char *_s);
+
+/* fs */
+void panic (const char *_message, int _errnum);
+
+/* crt/sendrec.s */
+int sendrec (int _src_dest, message *_m_ptr);
+/* crt/catch.s */
+void begsig (int dummy);
 
 #endif /* _LIB_H */

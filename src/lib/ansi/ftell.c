@@ -2,8 +2,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-long ftell(iop)
-FILE *iop;
+long ftell(FILE *iop)
 {
   long result;
   int adjust = 0;

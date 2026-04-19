@@ -9,11 +9,10 @@
 
 extern char **environ;
 
-char *getenv(name)
-_CONST char *name;
+char *getenv(const char *name)
 {
   char **v;
-  _CONST register char *n;
+  const register char *n;
   register char *p;
 
   if (environ == (char **) NULL || name == (char *)NULL) return((char *)NULL);

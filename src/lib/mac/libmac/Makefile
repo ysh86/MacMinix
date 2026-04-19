@@ -1,9 +1,7 @@
-CFLAGS= -c -DACK -LIB -D_MINIX -D_POSIX_SOURCE
+CC= c68
+CFLAGS= -c -O -DACK -LIB -D_MINIX -D_POSIX_SOURCE -D__STDC__=1
 BUILD=echo
 MFILE=Makefile
-FILES = Vertical.h Files.h Controls.h Desk.h Dialogs.h Events.h Fonts.h \
-	Memory.h Menus.h OSEvents.h OSUtils.h Quickdraw.h Resources.h \
-	Segments.h Toolutils.h Windows.h Packages.h
 
 $f.o:	$f.$e
 	@echo ------------------------------ $f ------------------------------
@@ -19,7 +17,7 @@ all:
 	@for i in ../../../include/mac/*.h;	\
 	  do					\
 	    $(BUILD) `basename $$i .h` -ack;	\
-          done;
+	  done;
 	@ls *.c >tmp.1
 	@sed <tmp.1 >tmp.2 '/\.c/s///;/^/s//make -f $(MFILE) e=c f=/'
 	@sh tmp.2

@@ -2,13 +2,13 @@
 
 #include <string.h>
 
-char *strncpy(dst, src, n)
-char *dst;
-_CONST char *src;
-size_t n;
-{
+char *strncpy(
+char *dst,
+const char *src,
+size_t n
+){
   register char *dscan;
-  register _CONST char *sscan;
+  register const char *sscan;
   register size_t count;
 
   dscan = dst;

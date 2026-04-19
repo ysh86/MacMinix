@@ -1,11 +1,12 @@
 #include <lib.h>
 #include <stdio.h>
 
-size_t fread(ptrfix, size, count, file)
-void *ptrfix;
-size_t size, count;
-FILE *file;
-{
+size_t fread(
+void *ptrfix,
+size_t size,
+size_t count,
+FILE *file
+){
   register int c;
   size_t ndone = 0, s;
   char *ptr = (char *) ptrfix;

@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-FILE *fdopen(fd, mode)
-int fd;
-_CONST char *mode;
-{
+FILE *fdopen(
+int fd,
+_CONST char *mode
+){
   register int i;
   FILE *fp;
   int flags = 0;

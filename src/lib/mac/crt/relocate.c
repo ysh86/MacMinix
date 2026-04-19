@@ -11,11 +11,11 @@
 /*===========================================================================*
  *				relocate				     *
  *===========================================================================*/
-long relocate(hdrp, txt, segsizes)
-long *hdrp;
-char *txt;
-long segsizes[];
-{
+long relocate(
+long *hdrp,
+char *txt,
+long segsizes[]
+){
     register char *text, *p;
     register c;
     register long off, adr;
@@ -83,15 +83,15 @@ long segsizes[];
 }
 #else
 #include <a.out.h>
-long relocate(hdrp, txt, segsizes)
-struct exec *hdrp;
-char  *txt;
-long   segsizes[];
-{
+long relocate(
+struct exec *hdrp,
+char  *txt,
+long   segsizes[]
+){
     struct relocation_info *ptrs[2];
     long   adjust, i, j, sizes[2];
     register struct relocation_info *rel;
-    int cnt;
+    long cnt;
     register char *address;
     char *text, *start[2];
     long datum;

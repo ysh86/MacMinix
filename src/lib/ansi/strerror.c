@@ -6,9 +6,9 @@
 
 #include <string.h>
 
-char *strerror(errnum)
-int errnum;
-{
+char *strerror(
+int errnum
+){
   extern int sys_nerr;
   extern char *sys_errlist[];
 

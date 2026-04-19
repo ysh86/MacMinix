@@ -4,8 +4,7 @@
  *  Author: Terrence W. Holm          Sep. 1988
  */
 
-int ffs(word)
-int word;
+int ffs(int word)
 {
   int i;
 

@@ -45,8 +45,7 @@ char str[256];
 /*
  *	fatal - report error and die. Never returns
  */
-void fatal(s)
-char *s;
+void fatal(char *s)
 {
   (void) fprintf(stderr, "curses: %s\n", s);
   exit(1);
@@ -56,15 +55,13 @@ char *s;
 /*
  *	outc - call putchar, necessary because putchar is a macro.
  */
-void outc(c)
-int c;
+void outc(int c)
 {
   putchar(c);
 }
 
 
-void move(y, x)
-int y, x;
+void move(int y, int x)
 {
   row = y;
   col = x;
@@ -77,8 +74,7 @@ void clrtoeol()
   for (i = col; i < COLS; i++) nscrn[row][i] = ' ' | mode;
 }
 
-void printw(fmt, a1, a2, a3, a4, a5)
-char *fmt, *a1, *a2, *a3, *a4, *a5;
+void printw(char *fmt, char *a1, char *a2, char *a3, char *a4, char *a5)
 {
   int i, j, k;
 
@@ -108,7 +104,7 @@ void clrtobot()
 
 void standout()
 {
-  mode = BOLD;
+  mode = (char)BOLD;
 }
 
 void standend()
@@ -116,8 +112,7 @@ void standend()
   mode = NORMAL;
 }
 
-void addstr(s)
-char *s;
+void addstr(char *s)
 {
   printw("%s", s, "", "", "", "");
 }

@@ -1,15 +1,15 @@
 #include <lib.h>
 
-PUBLIC int callm1(proc, syscallnr, int1, int2, int3, ptr1, ptr2, ptr3)
-int proc;			/* FS or MM */
-int syscallnr;			/* which system call */
-int int1;			/* first integer parameter */
-int int2;			/* second integer parameter */
-int int3;			/* third integer parameter */
-char *ptr1;			/* pointer parameter */
-char *ptr2;			/* pointer parameter */
-char *ptr3;			/* pointer parameter */
-{
+PUBLIC int callm1(
+int proc,			/* FS or MM */
+int syscallnr,			/* which system call */
+int int1,			/* first integer parameter */
+int int2,			/* second integer parameter */
+int int3,			/* third integer parameter */
+char *ptr1,			/* pointer parameter */
+char *ptr2,			/* pointer parameter */
+char *ptr3			/* pointer parameter */
+){
 /* Send a message and get the response.  The 'M.m_type' field of the
  * reply contains a value (>= 0) or an error code (<0). Use message format m1.
  */
@@ -23,12 +23,12 @@ char *ptr3;			/* pointer parameter */
 }
 
 
-PUBLIC int callm3(proc, syscallnr, int1, name)
-int proc;			/* FS or MM */
-int syscallnr;			/* which system call */
-int int1;			/* integer parameter */
-_CONST char *name;		/* string */
-{
+PUBLIC int callm3(
+int proc,			/* FS or MM */
+int syscallnr,			/* which system call */
+int int1,			/* integer parameter */
+_CONST char *name		/* string */
+){
 /* This form of system call is used for those calls that contain at most
  * one integer parameter along with a string.  If the string fits in the
  * message, it is copied there.  If not, a pointer to it is passed.
@@ -46,10 +46,10 @@ _CONST char *name;		/* string */
 }
 
 
-PUBLIC int callx(proc, syscallnr)
-int proc;			/* FS or MM */
-int syscallnr;			/* which system call */
-{
+PUBLIC int callx(
+int proc,			/* FS or MM */
+int syscallnr			/* which system call */
+){
 /* Send a message and get the response.  The '_M.m_type' field of the
  * reply contains a value (>= 0) or an error code (<0).
  */
@@ -66,8 +66,8 @@ int syscallnr;			/* which system call */
 }
 
 
-PUBLIC int len(s)
-_CONST register char *s;	/* character string whose length is needed */
+/* character string whose length is needed */
+PUBLIC int len(_CONST register char *s)
 {
 /* Return the length of a character string, including the 0 at the end. */
   register int k;

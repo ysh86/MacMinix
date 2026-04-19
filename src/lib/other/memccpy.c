@@ -14,12 +14,12 @@
 #	define	UNSCHAR(c)	((c)&CHARBITS)
 #endif
 
-void *memccpy(dst, src, ucharstop, size)
-void * dst;
-_CONST void * src;
-int ucharstop;
-_SIZET size;
-{
+void *memccpy(
+void * dst,
+_CONST void * src,
+int ucharstop,
+_SIZET size
+){
   register char *d;
   register _CONST char *s;
   register _SIZET n;

@@ -8,19 +8,13 @@
 #undef	 SLOWDEBUG		/* some extra test loops (requires DEBUG) */
 
 #ifdef DEBUG
-PRIVATE _PROTOTYPE( void assert_failed, (void));
+static void assert_failed(void);
 #define	ASSERT(b)	if (!(b)) assert_failed();
 #else
 #define	ASSERT(b)		/* empty */
 #endif
 
-#if (CHIP == INTEL)
-#define	ptrint		int
-#endif
-
-#if (CHIP == M68000)
-#define	ptrint		long
-#endif
+#define	ptrint		size_t
 
 #define BRKSIZE		1024
 #define	PTRSIZE		sizeof(char *)
@@ -41,13 +35,9 @@ PRIVATE _PROTOTYPE( void assert_failed, (void));
  * Free slots are merged together by free().
  */
 
-extern char *sbrk(), *brk();
-PRIVATE char *_bottom, *_top, *_empty;
+static char *_bottom, *_top, *_empty;
 
-PRIVATE _PROTOTYPE( int grow, (unsigned len));
-
-PRIVATE int grow(len)
-unsigned len;
+static int grow(size_t len)
 {
   register char *p;
 
@@ -61,11 +51,10 @@ unsigned len;
   return(1);
 }
 
-void *malloc(size)
-unsigned size;
+void *malloc(size_t size)
 {
   register char *prev, *p, *next, *new;
-  register unsigned len, ntries;
+  register size_t len, ntries;
 
   if (size == 0) size = PTRSIZE;/* avoid slots less that 2*PTRSIZE */
   for (ntries = 0; ntries < 2; ntries++) {
@@ -109,15 +98,15 @@ unsigned size;
   return((void *)NULL);
 }
 
-void *realloc(oldfix, size)
-void *oldfix;
-unsigned size;
-{
+void *realloc(
+void *oldfix,
+size_t size
+){
   register char *prev, *p, *next, *new;
-  register unsigned len, n;
+  register size_t len, n;
   char *old = (char *) oldfix;
 
-  if (size > -2 * PTRSIZE) return(0);
+  if (size > (size_t)(-2 * (int)PTRSIZE)) return(0);
   len = Align(size, PTRSIZE) + PTRSIZE;
   next = NextSlot(old);
   n = (int) (next - old);	/* old length */
@@ -153,9 +142,10 @@ unsigned size;
   return((void *)new);
 }
 
-void *calloc(n, size)
-unsigned n, size;
-{
+void *calloc(
+size_t n,
+size_t size
+){
   register char *p, *cp;
 
   n *= size;
@@ -165,8 +155,7 @@ unsigned n, size;
   return((void *)cp);
 }
 
-void free(pfix)
-void *pfix;
+void free(void *pfix)
 {
   register char *prev, *next;
   char *p = (char *) pfix;
@@ -196,7 +185,7 @@ void *pfix;
 }
 
 #ifdef DEBUG
-PRIVATE void assert_failed()
+static void assert_failed()
 {
   write(2, "assert failed in lib/malloc.c\n", 30);
   abort();

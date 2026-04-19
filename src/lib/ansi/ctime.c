@@ -3,18 +3,18 @@
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #define toint(X)  (X - '0')
 
-PRIVATE char      timebuf[26];
+static char      timebuf[26];
 
-PRIVATE char      *day[]   = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-PRIVATE char      *month[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+static char      *day[]   = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+static char      *month[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun",
                               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 void tzset();
 
-char *asctime(time)
-register _CONST struct tm *time;
+char *asctime(const struct tm *time)
 /*
  *      Convert <time> structure value to a string.  The same format, and
  *      the same internal buffer, as for ctime() is used for this function.
@@ -29,8 +29,7 @@ register _CONST struct tm *time;
         return(timebuf);
 }
 
-char *ctime(rawtime)
-_CONST time_t *rawtime;
+char *ctime(const time_t *rawtime)
 /*
  *      Convert <rawtime> to a string.  A 26 character fixed field string
  *      is created from the raw time value.  The following is an example
@@ -54,14 +53,13 @@ _CONST time_t *rawtime;
 #define SECS_PER_YEAR   (365*SECS_PER_DAY)
 #define SECS_PER_LEAPYEAR (SECS_PER_DAY + SECS_PER_YEAR)
 
-PRIVATE
-int days_per_mth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+static int days_per_mth[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-PRIVATE _PROTOTYPE( time_t tzoffset, (char *s, int *hasdst));
-PRIVATE _PROTOTYPE( int indst, (_CONST struct tm *t));
+static time_t tzoffset(char *s, int *hasdst);
+static int indst(const struct tm *t);
 
 time_t timezone = -1;	/* holds # seconds west of GMT */
-PRIVATE int dst = -1;	/* whether dst holds in current timezone */
+static int dst = -1;	/* whether dst holds in current timezone */
 
 /*
  * FIXME: none of these routines is very efficient. Also, none of them
@@ -76,9 +74,9 @@ PRIVATE int dst = -1;	/* whether dst holds in current timezone */
  *
  */
 
-time_t mktime(t)
-_CONST struct tm *t;
-{
+time_t mktime(
+struct tm *t
+){
         time_t s;
         int y;
 
@@ -111,10 +109,9 @@ _CONST struct tm *t;
 }
 
 
-PRIVATE struct tm the_time;
+static struct tm the_time;
 
-struct tm *gmtime(t)
-_CONST time_t *t;
+struct tm *gmtime(const time_t *t)
 {
         struct tm       *stm = &the_time;
         time_t  time = *t;
@@ -156,8 +153,7 @@ _CONST time_t *t;
 
 /* given a standard time, convert it to a local time */
 
-struct tm *localtime(t)
-_CONST time_t *t;
+struct tm *localtime(const time_t *t)
 {
         struct tm *stm;
         time_t offset;  /* seconds between local time and GMT */
@@ -186,7 +182,7 @@ _CONST time_t *t;
 
 /* set the timezone and dst flag to the local rules */
 
-void tzset()
+void tzset(void)
 {
 	timezone = tzoffset(getenv("TZ"), &dst);
 }
@@ -215,10 +211,10 @@ void tzset()
  *
  */
 
-PRIVATE time_t tzoffset(s, hasdst)
-char *s;
-int  *hasdst;
-{
+static time_t tzoffset(
+char *s,
+int  *hasdst
+){
         time_t off = 0;
         int x, sgn = 1;
 
@@ -266,8 +262,7 @@ int  *hasdst;
  *
  */
 
-PRIVATE int indst(t)
-_CONST struct tm *t;
+static int indst(const struct tm *t)
 {
         if (t->tm_mon == 3) {           /* April */
 /* before 1987, see if there's another sunday in the month */
@@ -289,8 +284,7 @@ _CONST struct tm *t;
 
 /* return difference between two time_t types -- ERS*/
 
-double difftime(t1, t2)
-time_t t1, t2;
+double difftime(time_t t1, time_t t2)
 {
 	return (double) (t2 - t1);
 }

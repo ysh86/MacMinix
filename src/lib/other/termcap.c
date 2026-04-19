@@ -52,10 +52,10 @@ extern char *UP;		/* up cursor movement */
  *	termcap entry found, 0 if not found, and -1 if file not found.
  */
 
-int tgetent(bp, name)
-char *bp;
-char *name;
-{
+int tgetent(
+char *bp,
+char *name
+){
   FILE *fp;
   char *file;
   char *term;
@@ -121,8 +121,7 @@ char *name;
  *	to id. Returns the value, -1 if invalid.
  */
 
-int tgetnum(id)
-char *id;
+int tgetnum(char *id)
 {
   register char *cp = capab;
 
@@ -145,8 +144,7 @@ char *id;
  *	present.
  */
 
-int tgetflag(id)
-char *id;
+int tgetflag(char *id)
 {
   register char *cp = capab;
 
@@ -169,10 +167,10 @@ char *id;
  *	etc. Returns the string, or NULL if it can't do it.
  */
 
-char *tgetstr(id, area)
-char *id;
-char **area;
-{
+char *tgetstr(
+char *id,
+char **area
+){
   register char *cp = capab;
   register char *wsp = *area;	/* workspace pointer  */
 
@@ -251,11 +249,11 @@ char **area;
  *	Returns "OOPS" if something's gone wrong, or the string otherwise.
  */
 
-char *tgoto(cm, destcol, destline)
-char *cm;
-int destcol;
-int destline;
-{
+char *tgoto(
+char *cm,
+int destcol,
+int destline
+){
   PRIVATE char ret[24];
   char *rp = ret;
   int incr = 0;
@@ -313,11 +311,11 @@ int destline;
  *	terminal that needs padding at the moment...
  */
 
-int tputs(cp, affcnt, outc)
-register char *cp;
-int affcnt;
-_PROTOTYPE( void (*outc), (int ch));
-{
+int tputs(
+register char *cp,
+int affcnt,
+_PROTOTYPE( void (*outc), (int ch))
+){
   if (cp == (char *)NULL) return(1);
   /* Do any padding interpretation - left null for MINIX just now */
   while (*cp) (*outc) (*cp++);

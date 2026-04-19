@@ -7,6 +7,8 @@
  * 
  */
 
+#include <sys/types.h>
+
 #ifndef _FCNTL_H
 #define _FCNTL_H
 
@@ -61,7 +63,7 @@ struct flock {
 #include <ansi.h>
 #endif
 
-_PROTOTYPE( int creat, (const char *_path, /* mode_t */ unsigned _mode)	);
+_PROTOTYPE( int creat, (const char *_path, mode_t _mode)	);
 _PROTOTYPE( int fcntl, (int _filedes, int _cmd, ...)	  		);
 _PROTOTYPE( int open,  (const char *_path, int _oflag, ...) 		);
 

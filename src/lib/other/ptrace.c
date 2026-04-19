@@ -1,9 +1,9 @@
 #include <lib.h>
 
-PUBLIC long ptrace(req, pid, addr, data)
-int req, pid;
-long addr, data;
-{
+PUBLIC long ptrace(
+int req, pid_t pid,
+long addr, long data
+){
   _M.m2_i1 = pid;
   _M.m2_i2 = req;
   _M.m2_l1 = addr;

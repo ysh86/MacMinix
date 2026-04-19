@@ -3,8 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int fclose(fp)
-FILE *fp;
+int fclose(FILE *fp)
 {
   register int i;
 

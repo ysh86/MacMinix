@@ -18,7 +18,7 @@ _setjmp:
 
 _longjmp:
 	move.l	4(sp),a0
-	move.w	8(sp),d0
+	move.l	8(sp),d0
 	bne	L1
 	move.l	#1,d0		! may not be 0
 L1:

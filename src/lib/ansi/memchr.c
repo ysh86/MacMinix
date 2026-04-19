@@ -15,12 +15,12 @@
 #	define	UNSCHAR(c)	((c)&CHARBITS)
 #endif
 
-void *memchr(s, ucharwanted, size)
-_CONST _VOIDSTAR s;
-int ucharwanted;
-size_t size;
-{
-  register _CONST char *scan;
+void *memchr(
+const void *s,
+int ucharwanted,
+size_t size
+){
+  register const char *scan;
   register size_t n;
   register int uc;
 
@@ -33,5 +33,5 @@ size_t size;
 		scan++;
   }
 
-  return( (_VOIDSTAR) NULL);
+  return( (void *) NULL);
 }

@@ -12,11 +12,10 @@
 #undef atol
 #endif
 
-PUBLIC long int atol(nptr)
-register _CONST char *nptr;
+long atol(const char *nptr)
 {
   register int c;
-  long int result = 0;
+  long result = 0;
   int negative = 0;
 
   while ((c = *nptr) && isspace(c))	/* skip leading white space */

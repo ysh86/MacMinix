@@ -3,12 +3,12 @@
 
 #include <string.h>
 
-char *strrchr(s, charwanted)		/* found char, or NULL if none */
-_CONST char *s;
-register char charwanted;
-{
-  register _CONST char *scan;
-  register _CONST char *place;
+char *strrchr(		/* found char, or NULL if none */
+const char *s,
+int charwanted
+){
+  register const char *scan;
+  register const char *place;
 
   place = (char *) NULL;
   for (scan = s; *scan != '\0'; scan++)

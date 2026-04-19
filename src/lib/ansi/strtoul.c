@@ -14,20 +14,20 @@
 #undef strtoul
 #endif
 
-PUBLIC unsigned long int strtoul(nptr, endptr, base)
-_CONST char *nptr;
-char **endptr;
-int base;
-{
+unsigned long strtoul(
+const char *nptr,
+char **endptr,
+int base
+){
   register int c;
-  unsigned long int result = 0L;
-  unsigned long int limit;
+  unsigned long result = 0L;
+  unsigned long limit;
   int negative = 0;
   int overflow = 0;
   int saw_a_digit = 0;			/* it's not a number without a digit */
 
   if (endptr != (char **) NULL)		/* set up default final pointer */
-	*endptr = nptr;
+	*endptr = (char *) nptr;
 
   while ((c = *nptr) && isspace(c))	/* skip leading white space */
 	++nptr;
@@ -72,7 +72,7 @@ int base;
 		result = base * result;
 		if (c > ULONG_MAX - result)
 			overflow = 1;
-		else	
+		else
 			result += c;
 	}
   }
@@ -87,6 +87,6 @@ int base;
   }
 
   if (endptr != (char **) NULL)		/* record good final pointer */
-	*endptr = nptr;
+	*endptr = (char *) nptr;
   return result;
 }

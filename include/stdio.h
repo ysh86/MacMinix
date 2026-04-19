@@ -3,13 +3,12 @@
 #ifndef _STDIO_H
 #define _STDIO_H
 
-#ifdef NULL
-#undef NULL
+#ifndef NULL
+#define NULL    ((void *)0)
 #endif
 
 #define BUFSIZ  1024
 #define NFILES  20
-#define NULL       0
 #define EOF     (-1)
 #define CMASK   0377
 
@@ -38,7 +37,7 @@ extern struct _io_buf {
 #define FILE struct _io_buf
 
 
-#define stdin  (_io_table[0])	
+#define stdin  (_io_table[0])
 #define stdout 	(_io_table[1])
 #define stderr 	(_io_table[2])
 
@@ -97,15 +96,15 @@ int	fputs		__STDIO_P__((const char *, FILE *));
 
 int	ungetc		__STDIO_P__((int, FILE *));
 
-/* WRONG */
+/* WRONG: return int */
 void	printf		__STDIO_P__((const char * __STDIO_VA__));
-/* WRONG */
+/* WRONG: return int */
 void	fprintf		__STDIO_P__((FILE *, const char * __STDIO_VA__));
-/* WRONG */
+/* WRONG: return int */
 char	*sprintf	__STDIO_P__((char *, const char * __STDIO_VA__));
 int	vprintf		__STDIO_P__((const char *, __STDIO_VA_LIST__));
 int	vfprintf	__STDIO_P__((FILE *, const char *, __STDIO_VA_LIST__));
-/* WRONG */
+/* WRONG: return int */
 char 	*vsprintf	__STDIO_P__((char *, const char *, __STDIO_VA_LIST__));
 int	scanf		__STDIO_P__((char *nonconstfmt __STDIO_VA__));
 int	fscanf		__STDIO_P__((FILE *, char *nonconstfmt __STDIO_VA__));
@@ -171,5 +170,8 @@ extern FILE	*freopen();
 extern long	ftell();
 extern char	*fgets();
 extern char	*gets();
+
+/* Minix specific */
+void std_err(const char *s);
 
 #endif /* _STDIO_H */

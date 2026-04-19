@@ -64,11 +64,11 @@
 #define ABS             -999	/* this process means absolute memory */
 #endif
 
-#define WORD_SIZE          2	/* number of bytes per word */
+#define WORD_SIZE          4	/* number of bytes per word */
 
 #define NIL_PTR   (char *) 0	/* generally useful expression */
 
-#define NO_NUM        0x8000	/* used as numerical argument to panic() */
+#define NO_NUM         ((int)0x8000)	/* used as numerical argument to panic() */
 #define SIG_PUSH_BYTES (4*sizeof(int))	/* how many bytes pushed by signal */
 
 /* Flag bits for i_mode in the inode. */

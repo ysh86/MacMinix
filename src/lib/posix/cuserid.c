@@ -13,8 +13,7 @@
 #define  L_cuserid   9
 #endif
 
-char *cuserid(user_name)
-char *user_name;
+char *cuserid(char *user_name)
 {
   PRIVATE char userid[L_cuserid];
   struct passwd *pw_entry;

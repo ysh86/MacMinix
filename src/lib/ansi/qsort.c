@@ -1,23 +1,26 @@
 #include <lib.h>
-PRIVATE _PROTOTYPE( void qsort1, (char *a1, char *a2, int width)	);
-PRIVATE _PROTOTYPE( int (*qcompar), (const void *, const void *)	);
-PRIVATE _PROTOTYPE( void qexchange, (char *p, char *q, int n)		);
-PRIVATE _PROTOTYPE( void q3exchange, (char *p, char *q, char *r, int n)	);
 
-void qsort(base, nel, width, compar)
-void *base;
-size_t nel, width;
-_PROTOTYPE( int (*compar), (const void *, const void *));
-{
+static void qsort1(char *a1, char *a2, int width);
+static int (*qcompar)(const void *, const void *);
+static void qexchange(char *p, char *q, int n);
+static void q3exchange(char *p, char *q, char *r, int n);
+
+void qsort(
+void *base,
+size_t nel,
+size_t width,
+int (*compar)(const void *, const void *)
+){
   qcompar = compar;
   if (nel > 0)
   	qsort1((char *) base, (char *) base + (nel - 1) * width, width);
 }
 
-PRIVATE void qsort1(a1, a2, width)
-char *a1, *a2;
-register int width;
-{
+static void qsort1(
+char *a1,
+char *a2,
+int width
+){
   register char *left, *right;
   register char *lefteq, *righteq;
   int cmp;
@@ -94,10 +97,11 @@ again:
   /* NOTREACHED */
 }
 
-PRIVATE void qexchange(p, q, n)
-register char *p, *q;
-register int n;
-{
+static void qexchange(
+char *p,
+char *q,
+int n
+){
   register int c;
 
   while (n-- > 0) {
@@ -107,10 +111,12 @@ register int n;
   }
 }
 
-PRIVATE void q3exchange(p, q, r, n)
-register char *p, *q, *r;
-register int n;
-{
+static void q3exchange(
+char *p,
+char *q,
+char *r,
+int n
+){
   register int c;
 
   while (n-- > 0) {

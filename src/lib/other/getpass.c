@@ -6,10 +6,10 @@
 
 PRIVATE char pwdbuf[9];
 
-char *getpass(prompt)
-char *prompt;
+char *getpass(char *prompt)
 {
-  int i = 0, save;
+  int i = 0;
+  short save;
   struct sgttyb tty;
 
   prints(prompt);

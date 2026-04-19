@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void setbuf(iop, buffer)
-FILE *iop;
-char *buffer;
-{
+void setbuf(
+FILE *iop,
+char *buffer
+){
   if (iop->_buf && testflag(iop, IOMYBUF)) free(iop->_buf);
 
   iop->_flags &= ~(IOMYBUF | UNBUFF | PERPRINTF);

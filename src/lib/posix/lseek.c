@@ -1,11 +1,11 @@
 #include <lib.h>
 #include <sys/types.h>
 
-PUBLIC off_t lseek(fd, offset, whence)
-int fd;
-off_t offset;
-int whence;
-{
+PUBLIC off_t lseek(
+int fd,
+off_t offset,
+int whence
+){
   int k;
   _M.m2_i1 = fd;
   _M.m2_l1 = offset;

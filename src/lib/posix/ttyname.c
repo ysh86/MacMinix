@@ -15,8 +15,7 @@
 PRIVATE char base[] = "/dev";
 PRIVATE char path[sizeof(base) + 1 + NAME_MAX];	/* extra 1 for '/' */
 
-PUBLIC char *ttyname(fildes)
-int fildes;
+PUBLIC char *ttyname(int fildes)
 {
   DIR *devices;
   struct dirent *entry;

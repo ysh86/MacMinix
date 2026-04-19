@@ -3,10 +3,9 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-char *mktemp(template)
-char *template;
+char *mktemp(char *template)
 {
-  int pid;
+  pid_t pid;
   char *p;
 
   pid = getpid();		/* get process id as semi-unique number */

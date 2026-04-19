@@ -9,15 +9,15 @@
 
 #define C_NULL  (char *) NULL
 
-PRIVATE char *scanpoint = C_NULL;
+static char *scanpoint = C_NULL;
 
-char *strtok(s, delim)		/* NULL if no token left */
-char *s;
-register _CONST char *delim;
-{
+char *strtok(		/* NULL if no token left */
+char *s,
+const char *delim
+){
   register char *scan;
   char *tok;
-  register _CONST char *dscan;
+  register const char *dscan;
 
   if (s == C_NULL && scanpoint == C_NULL) return(C_NULL);
   if (s != C_NULL)

@@ -95,6 +95,24 @@ typedef struct {
 ** Some function declarations that people tend to forget
 ** because they are lazy.
 */
-extern unshort trans(), getreq(), putrep(), timeout();
+extern unshort trans(
+header *h1,
+bufptr b1,
+unshort c1,
+header *h2,
+bufptr b2,
+unshort c2
+);
+extern unshort getreq(
+header *h,
+bufptr b,
+unshort c
+);
+extern unshort putrep(
+header *h,
+bufptr b,
+unshort c
+);
+extern unshort timeout(unshort t);
 
 #endif /* _AMOEBA_H */

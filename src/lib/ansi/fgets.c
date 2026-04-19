@@ -1,11 +1,11 @@
 #include <lib.h>
 #include <stdio.h>
 
-char *fgets(str, n, file)
-char *str;
-int n;
-FILE *file;
-{
+char *fgets(
+char *str,
+int n,
+FILE *file
+){
   register int ch = 0;		/* initialize is quick fix for case n = 1 */
   register char *ptr;
 

@@ -5,15 +5,17 @@
 		Messages to systask (special calls)
 ----------------------------------------------------------------------------*/
 
+PUBLIC void sys_xit(
 #if (CHIP == M68000)
-PUBLIC void sys_xit(parent, proc, basep, sizep)
-phys_clicks *basep, *sizep;
+int parent,			/* parent of exiting proc. */
+int proc,			/* which proc has exited */
+phys_clicks *basep,
+phys_clicks *sizep
 #else
-PUBLIC void sys_xit(parent, proc)
+int parent,			/* parent of exiting proc. */
+int proc			/* which proc has exited */
 #endif
-int parent;			/* parent of exiting proc. */
-int proc;			/* which proc has exited */
-{
+){
 /* A proc has exited.  Tell the kernel. */
 
   callm1(SYSTASK, SYS_XIT, parent, proc, 0, NIL_PTR, NIL_PTR, NIL_PTR);
@@ -24,10 +26,10 @@ int proc;			/* which proc has exited */
 }
 
 
-PUBLIC void sys_getsp(proc, newsp)
-int proc;			/* which proc has enabled signals */
-vir_bytes *newsp;		/* place to put sp read from kernel */
-{
+PUBLIC void sys_getsp(
+int proc,			/* which proc has enabled signals */
+vir_bytes *newsp		/* place to put sp read from kernel */
+){
 /* Ask the kernel what the sp is. */
 
 
@@ -36,11 +38,11 @@ vir_bytes *newsp;		/* place to put sp read from kernel */
 }
 
 
-PUBLIC void sys_sig(proc, sig, sighandler)
-int proc;			/* which proc has exited */
-int sig;			/* signal number: 1 - 16 */
-void (*sighandler) ();		/* pointer to signal handler in user space */
-{
+PUBLIC void sys_sig(
+int proc,			/* which proc has exited */
+int sig,			/* signal number: 1 - 16 */
+void (*sighandler) ()		/* pointer to signal handler in user space */
+){
 /* A proc has to be signaled.  Tell the kernel. */
 
   _M.m6_i1 = proc;
@@ -50,20 +52,22 @@ void (*sighandler) ();		/* pointer to signal handler in user space */
 }
 
 
+PUBLIC void sys_fork(
 #if (CHIP == M68000)
-PUBLIC void sys_fork(parent, child, pid, shadow)
+int parent,			/* proc doing the fork */
+int child,			/* which proc has been created by the fork */
+pid_t pid,			/* process id assigned by MM */
 #ifdef ALCYON_C_BUG_FIXED
-phys_clicks shadow;		/* memory allocated for shadow */
+phys_clicks shadow		/* memory allocated for shadow */
 #else
-int shadow;
+int shadow
 #endif
 #else
-PUBLIC void sys_fork(parent, child, pid)
+int parent,			/* proc doing the fork */
+int child,			/* which proc has been created by the fork */
+pid_t pid			/* process id assigned by MM */
 #endif
-int parent;			/* proc doing the fork */
-int child;			/* which proc has been created by the fork */
-int pid;			/* process id assigned by MM */
-{
+){
 /* A proc has forked.  Tell the kernel. */
 
 #if (CHIP == M68000)
@@ -74,28 +78,27 @@ int pid;			/* process id assigned by MM */
 }
 
 
-PUBLIC void sys_exec(proc, ptr, traced)
-int proc;			/* proc that did exec */
-char *ptr;			/* new stack pointer */
-int traced;			/* is tracing enabled? */
-{
+PUBLIC void sys_exec(
+int proc,			/* proc that did exec */
+char *ptr,			/* new stack pointer */
+int traced			/* is tracing enabled? */
+){
 /* A proc has exec'd.  Tell the kernel. */
 
   callm1(SYSTASK, SYS_EXEC, proc, traced, 0, ptr, NIL_PTR, NIL_PTR);
 }
 
-PUBLIC void sys_newmap(proc, ptr)
-int proc;			/* proc whose map is to be changed */
-char *ptr;			/* pointer to new map */
-{
+PUBLIC void sys_newmap(
+int proc,			/* proc whose map is to be changed */
+char *ptr			/* pointer to new map */
+){
 /* A proc has been assigned a new memory map.  Tell the kernel. */
 
 
   callm1(SYSTASK, SYS_NEWMAP, proc, 0, 0, ptr, NIL_PTR, NIL_PTR);
 }
 
-PUBLIC void sys_copy(mptr)
-message *mptr;			/* pointer to message */
+PUBLIC void sys_copy(message *mptr) /* pointer to message */
 {
 /* A proc wants to use local copy. */
 
@@ -105,10 +108,10 @@ message *mptr;			/* pointer to message */
   if (sendrec(SYSTASK, mptr) != 0) panic("sys_copy can't send", NO_NUM);
 }
 
-PUBLIC void sys_times(proc, ptr)
-int proc;			/* proc whose times are needed */
-time_t ptr[4];		/* pointer to time buffer */
-{
+PUBLIC void sys_times(
+int proc,			/* proc whose times are needed */
+time_t ptr[4]		/* pointer to time buffer */
+){
 /* Fetch the accounting info for a proc. */
 
   callm1(SYSTASK, SYS_TIMES, proc, 0, 0, (char *)ptr, NIL_PTR, NIL_PTR);
@@ -127,12 +130,13 @@ PUBLIC void sys_abort()
 }
 
 #if (CHIP == M68000)
-PUBLIC void sys_fresh(proc, ptr, dc, basep, sizep)
-int proc;			/* proc whose map is to be changed */
-char *ptr;			/* pointer to new map */
-phys_clicks dc;			/* size of initialized data */
-phys_clicks *basep, *sizep;	/* base and size for free_mem() */
-{
+PUBLIC void sys_fresh(
+int proc,			/* proc whose map is to be changed */
+char *ptr,			/* pointer to new map */
+phys_clicks dc,			/* size of initialized data */
+phys_clicks *basep,	/* base and size for free_mem() */
+phys_clicks *sizep
+){
 /* Create a fresh process image for exec().  Tell the kernel. */
 
   callm1(SYSTASK, SYS_FRESH, proc, (int) dc, 0, ptr, NIL_PTR, NIL_PTR);
@@ -143,10 +147,10 @@ phys_clicks *basep, *sizep;	/* base and size for free_mem() */
 #endif
 
 
-PUBLIC void sys_kill(proc, sig)
-int proc;			/* which proc has exited */
-int sig;			/* signal number: 1 - 16 */
-{
+PUBLIC void sys_kill(
+int proc,			/* which proc has exited */
+int sig			/* signal number: 1 - 16 */
+){
 /* A proc has to be signaled via MM.  Tell the kernel. */
 
   _M.m6_i1 = proc;
@@ -154,10 +158,10 @@ int sig;			/* signal number: 1 - 16 */
   callx(SYSTASK, SYS_KILL);
 }
 
-PUBLIC int sys_trace(req, procnr, addr, data_p)
-int req, procnr;
-long addr, *data_p;
-{
+PUBLIC int sys_trace(
+int req, int procnr,
+long addr, long *data_p
+){
   int r;
 
   _M.m2_i1 = procnr;
@@ -169,8 +173,7 @@ long addr, *data_p;
   return(r);
 }
 
-PUBLIC void tell_fs(what, p1, p2, p3)
-int what, p1, p2, p3;
+PUBLIC void tell_fs(int what, int p1, int p2, int p3)
 {
 /* This routine is only used by MM to inform FS of certain events:
  *      tell_fs(CHDIR, slot, dir, 0)

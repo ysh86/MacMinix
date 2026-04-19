@@ -4,11 +4,11 @@
  *  Author: Terrence W. Holm          Sep. 1988
  */
 
-void swab(from, to, count)
-char *from;
-char *to;
-int count;
-{
+void swab(
+char *from,
+char *to,
+int count
+){
   register char temp;
 
   count >>= 1;

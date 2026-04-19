@@ -1,6 +1,5 @@
 #include <lib.h>
-char *crypt(pw, salt)
-char *pw, *salt;
+char *crypt(_CONST char *pw, char *salt)
 {
   PRIVATE char buf[14];
   char bits[67];

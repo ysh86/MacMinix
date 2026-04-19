@@ -15,7 +15,9 @@
 #define CLK_TCK CLOCKS_PER_SEC	/* obsolete name for CLOCKS_PER_SEC */
 #endif
 
+#ifndef NULL
 #define NULL    ((void *)0)
+#endif
 
 #ifndef _SIZE_T
 #define _SIZE_T

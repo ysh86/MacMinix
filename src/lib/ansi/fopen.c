@@ -15,8 +15,7 @@ extern struct _io_buf _stdin;
 extern struct _io_buf _stdout;
 extern struct _io_buf _stderr;
 
-FILE *fopen(name, mode)
-_CONST char *name, *mode;
+FILE *fopen(const char *name, const char *mode)
 {
   register int i;
   FILE *fp;

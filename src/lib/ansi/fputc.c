@@ -5,10 +5,11 @@
 extern void (*__cleanup) ();
 extern void _cleanup();
 
-int fputc(ch, iop)
-char ch;
-FILE *iop;
-{
+int fputc(
+int c,
+FILE *iop
+){
+  char ch = c & 0xff;
   int n = 0;
   int didwrite = 0;
 

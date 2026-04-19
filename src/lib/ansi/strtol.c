@@ -14,20 +14,20 @@
 #undef strtol
 #endif
 
-PUBLIC long int strtol(nptr, endptr, base)
-_CONST char *nptr;
-char **endptr;
-int base;
-{
+long strtol(
+const char *nptr,
+char **endptr,
+int base
+){
   register int c;
-  long int result = 0L;
-  long int limit;
+  long result = 0L;
+  long limit;
   int negative = 0;
   int overflow = 0;
   int saw_a_digit = 0;			/* it's not a number without a digit */
 
   if (endptr != (char **) NULL)		/* set up default final pointer */
-	*endptr = nptr;
+	*endptr = (char *) nptr;
 
   while ((c = *nptr) && isspace(c))	/* skip leading white space */
 	++nptr;
@@ -72,7 +72,7 @@ int base;
 		result *= base;
 		if (c > LONG_MAX - result)
 			overflow = 1;
-		else	
+		else
 			result += c;
 	}
   }
@@ -90,6 +90,6 @@ int base;
   }
 
   if (endptr != (char **) NULL)		/* record good final pointer */
-	*endptr = nptr;
+	*endptr = (char *) nptr;
   return result;
 }

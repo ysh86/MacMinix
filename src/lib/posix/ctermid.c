@@ -19,8 +19,7 @@
 #define L_ctermid  9
 #endif
 
-char *ctermid(name_space)
-char *name_space;
+char *ctermid(char *name_space)
 {
   PRIVATE char termid[L_ctermid];
 

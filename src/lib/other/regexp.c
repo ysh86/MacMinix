@@ -185,8 +185,7 @@ STATIC _PROTOTYPE( void regoptail, (char *p, char *val)			);
  * Beware that the optimization-preparation code in here knows about some
  * of the structure of the compiled regexp.
  */
-regexp *regcomp(exp)
-char *exp;
+regexp *regcomp(char *exp)
 {
   register regexp *r;
   register char *scan;
@@ -264,10 +263,10 @@ char *exp;
  * is a trifle forced, but the need to tie the tails of the branches to what
  * follows makes it hard to avoid.
  */
-PRIVATE char *reg(paren, flagp)
-int paren;			/* Parenthesized? */
-int *flagp;
-{
+PRIVATE char *reg(
+int paren,			/* Parenthesized? */
+int *flagp
+){
   register char *ret;
   register char *br;
   register char *ender;
@@ -330,8 +329,7 @@ int *flagp;
  *
  * Implements the concatenation operator.
  */
-PRIVATE char *regbranch(flagp)
-int *flagp;
+PRIVATE char *regbranch(int *flagp)
 {
   register char *ret;
   register char *chain;
@@ -367,8 +365,7 @@ int *flagp;
  * It might seem that this node could be dispensed with entirely, but the
  * endmarker role is not redundant.
  */
-PRIVATE char *regpiece(flagp)
-int *flagp;
+PRIVATE char *regpiece(int *flagp)
 {
   register char *ret;
   register char op;
@@ -426,8 +423,7 @@ int *flagp;
  * faster to run.  Backslashed characters are exceptions, each becoming a
  * separate node; the code is simpler that way and it's not worth fixing.
  */
-PRIVATE char *regatom(flagp)
-int *flagp;
+PRIVATE char *regatom(int *flagp)
 {
   register char *ret;
   int flags;
@@ -522,8 +518,7 @@ int *flagp;
 /*
  - regnode - emit a node
  */
-PRIVATE char *regnode(op)
-char op;
+PRIVATE char *regnode(int op)
 {
   register char *ret;
   register char *ptr;
@@ -545,8 +540,7 @@ char op;
 /*
  - regc - emit (if appropriate) a byte of code
  */
-PRIVATE void regc(b)
-char b;
+PRIVATE void regc(int b)
 {
   if (regcode != &regdummy)
 	*regcode++ = b;
@@ -559,10 +553,10 @@ char b;
  *
  * Means relocating the operand.
  */
-PRIVATE void reginsert(op, opnd)
-char op;
-char *opnd;
-{
+PRIVATE void reginsert(
+int op,
+char *opnd
+){
   register char *src;
   register char *dst;
   register char *place;
@@ -585,10 +579,10 @@ char *opnd;
 /*
  - regtail - set the next-pointer at the end of a node chain
  */
-PRIVATE void regtail(p, val)
-char *p;
-char *val;
-{
+PRIVATE void regtail(
+char *p,
+char *val
+){
   register char *scan;
   register char *temp;
   register int offset;
@@ -614,10 +608,10 @@ char *val;
 /*
  - regoptail - regtail on operand of first argument; nop if operandless
  */
-PRIVATE void regoptail(p, val)
-char *p;
-char *val;
-{
+PRIVATE void regoptail(
+char *p,
+char *val
+){
   /* "Operandless" and "op != BRANCH" are synonymous in practice. */
   if (p == (char *)NULL || p == &regdummy || OP(p) != BRANCH) return;
   regtail(OPERAND(p), val);
@@ -648,11 +642,11 @@ STATIC _PROTOTYPE( char *regprop, (char *op)				);
 /*
  - regexec - match a regexp against a string
  */
-int regexec(prog, string, bolflag)
-register regexp *prog;
-register char *string;
-int bolflag;
-{
+int regexec(
+register regexp *prog,
+register char *string,
+int bolflag
+){
   register char *s;
 
   /* Be paranoid... */
@@ -708,10 +702,10 @@ int bolflag;
 /*
  - regtry - try match at specific point
  */
-PRIVATE int regtry(prog, string)   /* 0 failure, 1 success */
-regexp *prog;
-char *string;
-{
+PRIVATE int regtry( /* 0 failure, 1 success */
+regexp *prog,
+char *string
+){
   register int i;
   register char **sp;
   register char **ep;
@@ -744,8 +738,7 @@ char *string;
  * need to know whether the rest of the match failed) by a loop instead of
  * by recursion.
  */
-PRIVATE int regmatch(prog)	/* 0 failure, 1 success */ 
-char *prog;
+PRIVATE int regmatch(char *prog)	/* 0 failure, 1 success */
 {
   register char *scan;		/* Current node. */
   char *next;			/* Next node. */
@@ -913,8 +906,7 @@ char *prog;
 /*
  - regrepeat - repeatedly match something simple, report how many
  */
-PRIVATE int regrepeat(p)
-char *p;
+PRIVATE int regrepeat(char *p)
 {
   register int count = 0;
   register char *scan;
@@ -958,8 +950,7 @@ char *p;
 /*
  - regnext - dig the "next" pointer out of a node
  */
-PRIVATE char *regnext(p)
-register char *p;
+PRIVATE char *regnext(register char *p)
 {
   register int offset;
 
@@ -981,8 +972,7 @@ STATIC char *regprop();
 /*
  - regdump - dump a regexp onto stdout in vaguely comprehensible form
  */
-void regdump(r)
-regexp *r;
+void regdump(regexp *r)
 {
   register char *s;
   register char op = EXACTLY;	/* Arbitrary non-END op. */
@@ -1019,8 +1009,7 @@ regexp *r;
 /*
  - regprop - printable representation of opcode
  */
-PRIVATE char *regprop(op)
-char *op;
+PRIVATE char *regprop(char *op)
 {
   register char *p;
   PRIVATE char buf[50];

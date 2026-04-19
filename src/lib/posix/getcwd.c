@@ -13,13 +13,13 @@
 
 #define  DIRECT_SIZE  (sizeof (struct direct))
 
-extern char *rindex();
+static void go_back(char *path);
 
-char *getcwd(buffer, size)
-char *buffer;
-int size;
 /* Get current working directory. */
-{
+char *getcwd(
+char *buffer,
+size_t size
+){
   int same_device, found, fd;
   char *r, path[PATH_MAX + 1], temp_name[NAME_MAX + 1];
   struct stat current, parent, dir_entry;
@@ -99,9 +99,9 @@ int size;
   return(chdir(buffer) ? (char *)NULL : buffer);
 }
 
-PRIVATE go_back(path)
-char *path;
-{
+static void go_back(
+char *path
+){
 /* If getcwd() gets in trouble and can't complete normally, reverse the
  * path built so far and change there so we end up in the directory that
  * we started in.
