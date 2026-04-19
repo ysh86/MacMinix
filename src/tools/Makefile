@@ -1,8 +1,9 @@
+CC=c68
 LD=/usr/lib/ld
 CV=/usr/lib/cv
 ASFLAGS=-c -DACK -T.
 AS=$(CC) $(ASFLAGS)
-CFLAGS=-c -I../kernel -D_POSIX_SOURCE -D_MINIX -T.
+CFLAGS=-c -O -D_POSIX_SOURCE -D_MINIX -D__STDC__=1 -T.
 LFLAGS = -c
 LIB=/usr/lib
 
@@ -12,7 +13,7 @@ macboot:	$(LIB)/crtmac.o $(LIB)/relocate.o macboot.o \
 		../kernel/setup.o macboot1.o \
 		 $(LIB)/libmac.a $(LIB)/libc.a $(LIB)/end.o
 	$(LD) $(LFLAGS) -o macboot.ack $(LIB)/crtmac.o $(LIB)/relocate.o \
-		../kernel/setup.o macboot.o macboot1.o \
+		setup.o macboot.o macboot1.o \
 		$(LIB)/libmac.a $(LIB)/libc.a $(LIB)/end.o
 	$(CV) macboot.ack macboot
 	@rm -f macboot.ack

@@ -34,6 +34,7 @@
  * login processes for lines that have been turned off; do this manually.
  */
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <signal.h>
@@ -42,6 +43,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <utmp.h>
+#include <stdlib.h>
 
 #define CONSNAME	"/dev/tty0"	/* system console device */
 
@@ -110,7 +112,24 @@ int pidct = 0;			/* count of running children */
 
 char *env[] = { (char *)0 };	/* tiny environment for execle */
 
-main()
+void onhup();
+void readttys();
+void startup(
+int linenr,
+int mode1,
+int mode2
+);
+void wtmp(
+char *user,			/* name of user */
+char *id,			/* inittab ID */
+char *line,			/* TTY name */
+int pid,			/* PID of process */
+int type,			/* TYPE of entry */
+int lineno			/* slot number in UTMP */
+);
+char *sbrk(int incr);
+
+void main()
 {
   int pid;			/* pid of child process */
   int fd;			/* fd of console for error messages */
@@ -195,7 +214,7 @@ void onhup()
   signal(SIGHUP, onhup);
 }
 
-readttys()
+void readttys()
 {
   /* (Re)read /etc/ttys. */
 
@@ -268,11 +287,11 @@ readttys()
   close(fd);
 }
 
-startup(linenr, mode1, mode2)
-int linenr;
-int mode1;
-int mode2;
-{
+void startup(
+int linenr,
+int mode1,
+int mode2
+){
   /* Fork off a process for the indicated line. */
 
   register struct slotent *slotp;	/* pointer to ttyslot */
@@ -333,14 +352,14 @@ int mode2;
 }
 
 
-wtmp(user, id, line, pid, type, lineno)
-char *user;			/* name of user */
-char *id;			/* inittab ID */
-char *line;			/* TTY name */
-int pid;			/* PID of process */
-int type;			/* TYPE of entry */
-int lineno;			/* slot number in UTMP */
-{
+void wtmp(
+char *user,			/* name of user */
+char *id,			/* inittab ID */
+char *line,			/* TTY name */
+int pid,			/* PID of process */
+int type,			/* TYPE of entry */
+int lineno			/* slot number in UTMP */
+){
 /* Log an event into the WTMP and UTMP files. */
 
   struct utmp utmp;		/* UTMP/WTMP User Accounting */
@@ -381,8 +400,7 @@ int lineno;			/* slot number in UTMP */
   }
 }
 
-char *sbrk(incr)
-int incr;
+char *sbrk(int incr)
 {
 /* One-off sbrk to allocate memory for execle.  The stack and heap are not set
  * up right for the library sbrk.
