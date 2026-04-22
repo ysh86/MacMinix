@@ -29,11 +29,17 @@
 
 static long gsize[8];
 
-extern char *ApplLimit;
-extern char *HeapEnd;
-extern char *ApplZone;
-extern char *CurrentA5;
-extern char *CurStackBase;
+extern Ptr CurrentA5;
+extern Ptr CurStackBase;
+extern Ptr ApplLimit;
+extern Ptr HeapEnd;
+extern Ptr ApplZone;
+
+extern Ptr cura7( void );
+extern void seta7( Ptr newa7 );
+
+extern long relocate( long *aouthdrp, char *txt, unsigned long segsizes[] );
+extern void setup( struct config *cf, short dbox, short warn );
 
 static void center( Rect *r, WindowPtr w );
 static void inform( char *s, int font, int size, int face, int skip );
@@ -41,10 +47,6 @@ static void putc( char c, int font, int size, int face );
 static void hex( unsigned long i, int ndig );
 static void warn( char *s1, char *s2, char *s3, char *s4, int fatal );
 static long load( char *w, long *left, char *name, char *file, int idx );
-
-extern long relocate( long *hdrp, char *txt, unsigned long segsizes[] );
-extern void setup( struct config *cf, short dbox, short warn );
-extern void seta7( char *newa7 );
 
 static
 void center(
@@ -157,7 +159,7 @@ int idx
     Handle  h;
     unsigned long sizes[3];
     unsigned long need, tsize;
-    long *hdr;
+    long *aouthdr;
     char *loadat, *src, *p;
     long relocsize, i;
 
@@ -165,25 +167,29 @@ int idx
         warn("Can't find ", file, "", "", 1);
     HLock(h);
 
-    hdr = (long *)*h;
+    /* aout */
+    aouthdr = (long *)*h;
     src = *h;
     src += 0x20;
     loadat = w;
 
-    relocsize = GetHandleSize(h) - 0x20L - hdr[2] - hdr[3];
-    need = hdr[2] + hdr[3] + hdr[4] + relocsize;
+    /* TEXT & DATA */
+    relocsize = GetHandleSize(h) - 0x20L - aouthdr[2] - aouthdr[3];
+    need = aouthdr[2] + aouthdr[3] + aouthdr[4] + relocsize;
     if (need > *left)
         warn("Not enough memory left to load ", file, "", "", 1);
-    BlockMove(src, w, hdr[2] + hdr[3]);
+    BlockMove(src, w, aouthdr[2] + aouthdr[3]);
 
-    src += hdr[2] + hdr[3];
-    w += hdr[2] + hdr[3];
-    for (p = w, i = 0; i < hdr[4]; i++)
+    /* BSS */
+    src += aouthdr[2] + aouthdr[3];
+    w += aouthdr[2] + aouthdr[3];
+    for (p = w, i = 0; i < aouthdr[4]; i++)
         *p++ = 0;
-    w += hdr[4];
-    BlockMove(src, w, relocsize);
 
-    if (relocate(hdr, loadat, sizes) < 0)
+    /* relocation */
+    w += aouthdr[4];
+    BlockMove(src, w, relocsize);
+    if (relocate(aouthdr, loadat, sizes) < 0)
         warn(file, ": Error in relocation", "", "", 1);
 
     HUnlock(h);
@@ -209,7 +215,7 @@ int idx
 
 int main(int argc, char *argv[])
 {
-    char *mem;
+    Ptr mem;
     long sleft, left;
     int (*save)();
     Handle h;
@@ -223,7 +229,7 @@ int main(int argc, char *argv[])
     TEInit();
     InitDialogs(0L);
     InitCursor();
-    FlushEvents((short)-1, (short)0);
+    FlushEvents(everyEvent, 0);
 
     setup(&conf, Button() == 1, 0);
 
@@ -236,11 +242,17 @@ int main(int argc, char *argv[])
      * STACK!
      */
     MaxMem(&g);
-    SetApplLimit((char *)((long)ApplZone + ((long)conf.heap * 1024L)));
+    SetApplLimit((Ptr)((long)ApplZone + ((long)conf.heap * 1024L)));
     if (HeapEnd > ApplLimit)
         SetApplLimit(HeapEnd);
-    mem = (char *)ROUND_DOWN_TO_CLICK((long)ApplLimit + (long)(32*1024L));
+    /* fix the application zone(= application heap) */
+    MaxApplZone();
+    /* reserve 32K for the stack */
+    mem = (Ptr)ROUND_DOWN_TO_CLICK((long)ApplLimit + (long)(32*1024L));
     save = (int (*)())mem;
+    /* free space for kernel, mm, fs, init and user processes on the 
+     * STACK!
+     */
     left = ROUND_UP_TO_CLICK((long)CurStackBase - (long)mem);
     seta7(mem);
     sleft = left;
@@ -255,6 +267,7 @@ int main(int argc, char *argv[])
     mem += load(mem, &left, "    init   ", INIT, 6);
     inform(0L, monaco, 9, normal, 0);
 
+    /* run kernel */
     (*save)(qd, (long)CurrentA5, (long)save, sleft,
             gsize[0], gsize[1], gsize[2], gsize[3],
             gsize[4], gsize[5], gsize[6], gsize[7]);
