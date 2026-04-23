@@ -1,36 +1,35 @@
 /* This file contains the C startup code for Minix on the Macintosh. */
+#include <minix/boot.h>
+#include "kernel.h"
+#include "proc.h"
+#include "setup.h"
+
 #include <mac/Quickdraw.h>
 #include <mac/Events.h>
 #include <mac/Dialogs.h>
 #include <mac/Windows.h>
 #include <mac/Menus.h>
 #include <mac/Fonts.h>
-#include "kernel.h"
-#include "proc.h"
-#include "setup.h"
-#include <minix/boot.h>
+#include <mac/Other.h>
 
-#ifndef THINK_C
 PUBLIC  char k_stack[8192];
-#endif
 PUBLIC  phys_clicks sizes[8];
 PUBLIC  phys_bytes free_bytes, mem_bytes;
-PUBLIC  struct qd *qd;
 
-#ifdef THINK_C
-extern int *ROMBase : 0x2AE;
-#else
+PUBLIC struct qd *qd;
 extern int *ROMBase;
-#endif
 
-/*==========================================================================*
- *				cstart					    *
- *==========================================================================*/
-PUBLIC void cstart(q, a5, memat, size, kc, kd, mc, md, fc, fd, ic, id)
-struct qd *q;
-long a5, memat, size, kc, kd, mc, md, fc, fd, ic, id;
-{
-/* Perform initializations. */
+/* start.s */
+void setksp(void);
+
+/*===========================================================================*
+ *                                  cstart                                   *
+ *===========================================================================*/
+PUBLIC void cstart(
+struct qd *q, long a5, long memat, long size,
+long kc, long kd, long mc, long md, long fc, long fd, long ic, long id
+) {
+  /* Perform initializations. */
   phys_clicks *mm_data, *fs_data;
   struct config conf;
 
@@ -50,14 +49,14 @@ long a5, memat, size, kc, kd, mc, md, fc, fd, ic, id;
   TEInit();
   InitDialogs(0L);
   InitCursor();
-  FlushEvents((short)-1, (short)0);
-  
+  FlushEvents(everyEvent, 0);
+
   /* record sizes */
   sizes[1] = (kc+kd) >> CLICK_SHIFT; sizes[0] = 0;
   sizes[3] = (mc+md) >> CLICK_SHIFT; sizes[2] = 0;
   sizes[5] = (fc+fd) >> CLICK_SHIFT; sizes[4] = 0;
   sizes[7] = (ic+id) >> CLICK_SHIFT; sizes[6] = 0;
-  
+
   /* set up fs data */
   fs_data = (phys_clicks *)(memat + kc + kd + mc + md + fc);
   if (fs_data[0] != 0xDADA)
@@ -74,25 +73,16 @@ long a5, memat, size, kc, kd, mc, md, fc, fd, ic, id;
 
   setup(&conf, 0, 0);
   if (conf.ram) {
-  	BOOT_DEV = DEV_FD0;
-  	ROOT_DEV = DEV_RAM;
+    BOOT_DEV = DEV_FD0;
+    ROOT_DEV = DEV_RAM;
+  } else {
+    BOOT_DEV = DEV_HD0;
+    ROOT_DEV = DEV_HD0;
   }
-  else {
-  	BOOT_DEV = DEV_HD0;
-  	ROOT_DEV = DEV_HD0;
-  }
-  boot_parameters.bp_processor = FALSE;		/* FS needs to know */
+  boot_parameters.bp_processor = FALSE; /* FS needs to know */
+
   set_exceptions(0);
-#ifdef THINK_C 
-  {
-    extern long savedsp;
-  	asm {
-    	move.l	a7,savedsp
-  	}
-  	_main();
-  }
-#else
+
   setksp();
   main();
-#endif
 }

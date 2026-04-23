@@ -35,8 +35,12 @@ extern Ptr ApplLimit;
 extern Ptr HeapEnd;
 extern Ptr ApplZone;
 
-extern Ptr cura7( void );
+/* crtmac */
+extern struct qd *qd;
+
+/* macboot1.s */
 extern void seta7( Ptr newa7 );
+extern Ptr cura7( void );
 
 extern long relocate( long *aouthdrp, char *txt, unsigned long segsizes[] );
 extern void setup( struct config *cf, short dbox, short warn );

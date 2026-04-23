@@ -127,6 +127,10 @@ int pid,			/* PID of process */
 int type,			/* TYPE of entry */
 int lineno			/* slot number in UTMP */
 );
+
+/* override the C library sbrk()
+ * my sbrk() is called by execle() implicitly
+ */
 char *sbrk(int incr);
 
 void main()
