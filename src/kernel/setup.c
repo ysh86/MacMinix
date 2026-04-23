@@ -1,6 +1,10 @@
-#include "kernel.h"
-#include "setup.h"
-#include "tty.h"
+#define PRIVATE       static
+#define PUBLIC
+#define FORWARD       static
+#include <ansi.h>
+
+#include <string.h>
+
 #include <mac/Windows.h>
 #include <mac/Dialogs.h>
 #include <mac/Resources.h>
@@ -10,6 +14,10 @@
 #include <mac/Files.h>
 #include <mac/BCD.h>
 #include <mac/StdFile.h>
+#include <mac/Controls.h>
+#include <mac/OSEvents.h>
+
+#include "setup.h"
 
 #define BOK		1
 #define BCANCEL		2
@@ -22,10 +30,6 @@
 #define BMAPOPT		11
 #define BMAPESCAPE	12
 #define BMAPCMDOPT	13
-
-#ifdef THINK_C
-extern int CurApRefNum : 0x900;
-#endif
 
 PRIVATE char st[255];
 
@@ -49,7 +53,7 @@ char *s;
 {
   CInfoPBRec c;
   static ParamBlockRec pb;
-  int err;
+  OSErr err;
   long dirid;
   char *p;
   static char out[255];
@@ -99,10 +103,12 @@ char *s;
  *===========================================================================*/
 PUBLIC void setup(cf, dbox, warn)
 struct config *cf;
+short dbox;
+short warn;
 {
   struct config save;
   DialogPtr d;
-  short ih, it;
+  Short ih, it;
   Handle cr, h;
   Rect box;
   SFReply sfr;
@@ -112,10 +118,8 @@ struct config *cf;
   SFTypeList tl;
   char *p;
   EventRecord e;
-#ifndef THINK_C
-  extern int CurApRefNum;
-#endif
-  int currentref;
+  extern Short CurApRefNum;
+  Short currentref;
 
   if ((cr = GetNamedResource((ResType)"CONF", "MINIX Configuration")) == 0L) {
     memcpy(cf->root, "ROOT", 5);
@@ -161,19 +165,19 @@ struct config *cf;
     GetDItem(d, BHEAP, &it, &h, &box);
     SetIText(h, st);
     GetDItem(d, BMAP, &it, &h, &box);
-    SetCtlValue(h, cf->keymap);
+    SetCtlValue((ControlHandle)h, cf->keymap);
     GetDItem(d, BRAM, &it, &h, &box);
-    SetCtlValue(h, cf->ram);
+    SetCtlValue((ControlHandle)h, cf->ram);
     GetDItem(d, BPORTA, &it, &h, &box);
-    SetCtlValue(h, cf->porta);
+    SetCtlValue((ControlHandle)h, cf->porta);
     GetDItem(d, BPORTB, &it, &h, &box);
-    SetCtlValue(h, cf->portb);
+    SetCtlValue((ControlHandle)h, cf->portb);
     GetDItem(d, BMAPOPT, &it, &h, &box);
-    SetCtlValue(h, cf->mapopt);
+    SetCtlValue((ControlHandle)h, cf->mapopt);
     GetDItem(d, BMAPESCAPE, &it, &h, &box);
-    SetCtlValue(h, cf->maptoescape);
+    SetCtlValue((ControlHandle)h, cf->maptoescape);
     GetDItem(d, BMAPCMDOPT, &it, &h, &box);
-    SetCtlValue(h, cf->mapcmdopt);
+    SetCtlValue((ControlHandle)h, cf->mapcmdopt);
     GetNextEvent(0, &e);
     ShowWindow(d);
     if (Button()) DrawDialog(d);
@@ -185,43 +189,43 @@ struct config *cf;
         case BMAP:
           cf->keymap = !cf->keymap;
 	  GetDItem(d, BMAP, &it, &h, &box);
-	  SetCtlValue(h, cf->keymap);
+	  SetCtlValue((ControlHandle)h, cf->keymap);
           break;
           
         case BRAM:
           cf->ram = !cf->ram;
 	  GetDItem(d, BRAM, &it, &h, &box);
-	  SetCtlValue(h, cf->ram);
+	  SetCtlValue((ControlHandle)h, cf->ram);
           break;
           
         case BPORTA:
           cf->porta = !cf->porta;
 	  GetDItem(d, BPORTA, &it, &h, &box);
-	  SetCtlValue(h, cf->porta);
+	  SetCtlValue((ControlHandle)h, cf->porta);
           break;
           
         case BPORTB:
           cf->portb = !cf->portb;
 	  GetDItem(d, BPORTB, &it, &h, &box);
-	  SetCtlValue(h, cf->portb);
+	  SetCtlValue((ControlHandle)h, cf->portb);
           break;
           
         case BMAPOPT:
           cf->mapopt = !cf->mapopt;
 	  GetDItem(d, BMAPOPT, &it, &h, &box);
-	  SetCtlValue(h, cf->mapopt);
+	  SetCtlValue((ControlHandle)h, cf->mapopt);
           break;
 
         case BMAPESCAPE:
           cf->maptoescape = !cf->maptoescape;
 	  GetDItem(d, BMAPESCAPE, &it, &h, &box);
-	  SetCtlValue(h, cf->maptoescape);
+	  SetCtlValue((ControlHandle)h, cf->maptoescape);
           break;
 
         case BMAPCMDOPT:
           cf->mapcmdopt = !cf->mapcmdopt;
 	  GetDItem(d, BMAPCMDOPT, &it, &h, &box);
-	  SetCtlValue(h, cf->mapcmdopt);
+	  SetCtlValue((ControlHandle)h, cf->mapcmdopt);
           break;
 
         case BFILE:
@@ -229,7 +233,7 @@ struct config *cf;
           w.h = 100;
           w.v = 100;
           tl[0] = totype("MXFS");
-          SFGetFile(w, "", 0L, 1, tl, 0L, &sfr);
+          SFGetFile(w, "", (ProcPtr)0L, 1, tl, (ProcPtr)0L, &sfr);
           if (sfr.good) {
             n = fullname(sfr.vRefNum, sfr.fName);
 	    memcpy(cf->root, n, strlen(n)+1);
